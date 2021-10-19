@@ -23,7 +23,9 @@ const LoginPage = () => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({
+                email: email,
+                password: password })
         }
         fetch(url, requestOptions)
             .then(response => console.log('Submitted successfully'))

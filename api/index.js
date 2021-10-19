@@ -4,18 +4,23 @@ const cors = require('cors')
 const app = express()
 const port = 3001
 
+app.use(express.json())
 app.use(cors())
 
-app.post('/patients', function (req, res) {
+app.post('/patients', async (req, res) => {
+
+    const userLoginAttempt = req.body.email
+
     const connection = await mysql.createConnection({
         user: 'root',
         password: 'password',
         database: 'lrss_2021-10-18'
     })
 
-    const patients = await connection.query('SELECT * FROM `patients`')
-    console.log(patients)
+    const patientData = await connection.query("SELECT `email`, `password` FROM `patients` WHERE `email` = '" + userLoginAttempt + "';")
 
+    res.json(patientData)
+    res.sendStatus(200)
 })
 
 app.listen(port)
