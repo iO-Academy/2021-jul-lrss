@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import './LoginPage.css'
 
-const LoginPage = () => {
+const LoginPage = (props) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -28,7 +28,11 @@ const LoginPage = () => {
                 password: password })
         }
         fetch(url, requestOptions)
-            .then(response => console.log('Submitted successfully'))
+            .then(response => {
+                if(response.status === 200) {
+                    props.history.push('/appointments')
+                }
+            })
             .catch(error => console.log('Form submit error', error))
     }
 
