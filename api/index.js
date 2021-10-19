@@ -10,7 +10,8 @@ app.use(cors())
 
 app.post('/patients', async (req, res) => {
 
-    const userLoginAttempt = req.body.email
+    const emailEntered = req.body.email
+    const passwordEntered = req.body.password
 
     const connection = await mysql.createConnection({
         user: 'root',
@@ -18,11 +19,11 @@ app.post('/patients', async (req, res) => {
         database: 'lrss_2021-10-18'
     })
 
-    const patientData = await connection.query("SELECT `email`, `password` FROM `patients` WHERE `email` = '" + userLoginAttempt + "';")
-    if(patientData.length === 0) {
-        res.sendStatus(404)
-    } else {
+    const patientData = await connection.query("SELECT `email`, `password` FROM `patients` WHERE `email` = '" + emailEntered + "';")
+    if(patientData.length !== 0 && patientData[0].password === passwordEntered) {
         res.sendStatus(200)
+    } else {
+        res.sendStatus(404)
     }
 })
 
