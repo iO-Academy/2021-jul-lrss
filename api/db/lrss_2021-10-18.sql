@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# Version 4541
+# Version 5446
 #
-# http://www.sequelpro.com/
+# https://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
 # Host: 127.0.0.1 (MySQL 5.7.34)
-# Database: lrss
-# Generation Time: 2021-10-18 12:49:36 +0000
+# Database: lrss_2021-10-18
+# Generation Time: 2021-10-19 09:39:34 +0000
 # ************************************************************
 
 
@@ -15,6 +15,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
+SET NAMES utf8mb4;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
@@ -30,93 +31,6 @@ CREATE TABLE `appointment_notes` (
   `appointment_id` int(11) unsigned NOT NULL,
   `note` text NOT NULL,
   `actions` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-
-# Dump of table appointments
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `appointments`;
-
-CREATE TABLE `appointments` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `patient_id` int(10) unsigned NOT NULL,
-  `doctor_id` int(10) unsigned NOT NULL,
-  `date` date NOT NULL,
-  `time_slot` int(3) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-
-# Dump of table doctors
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `doctors`;
-
-CREATE TABLE `doctors` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(120) NOT NULL DEFAULT '',
-  `email` varchar(120) NOT NULL DEFAULT '',
-  `mobile` varchar(120) NOT NULL DEFAULT '',
-  `password` varchar(255) NOT NULL DEFAULT '',
-  `gender` varchar(30) NOT NULL DEFAULT '',
-  `specialism` varchar(120) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-LOCK TABLES `doctors` WRITE;
-/*!40000 ALTER TABLE `doctors` DISABLE KEYS */;
-
-INSERT INTO `doctors` (`id`, `name`, `email`, `mobile`, `password`, `gender`, `specialism`)
-VALUES
-	(1,'Dr Test M\'Balls','test@test.test','numbers','1234','Male','GP');
-
-/*!40000 ALTER TABLE `doctors` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table patients
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `patients`;
-
-CREATE TABLE `patients` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(120) NOT NULL DEFAULT '',
-  `email` varchar(120) NOT NULL DEFAULT '',
-  `mobile` varchar(120) NOT NULL DEFAULT '',
-  `password` varchar(255) NOT NULL DEFAULT '',
-  `gender` varchar(30) NOT NULL DEFAULT '',
-  `dob` varchar(30) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-LOCK TABLES `patients` WRITE;
-/*!40000 ALTER TABLE `patients` DISABLE KEYS */;
-
-INSERT INTO `patients` (`id`, `name`, `email`, `mobile`, `password`, `gender`, `dob`)
-VALUES
-	(1,'Phil McKraken Johnson','phil@phil.phil','numbers','1234','Female','23/10/1990');
-
-/*!40000 ALTER TABLE `patients` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table prescriptions
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `prescriptions`;
-
-CREATE TABLE `prescriptions` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `patient_id` int(10) unsigned NOT NULL,
-  `doctor_id` int(10) unsigned NOT NULL,
-  `appointment_id` int(11) unsigned NOT NULL,
-  `medication` varchar(120) NOT NULL DEFAULT '',
-  `details` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

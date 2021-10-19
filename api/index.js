@@ -7,20 +7,15 @@ const port = 3001
 app.use(cors())
 
 app.post('/patients', function (req, res) {
-    res.sendStatus(200)
-    // const connection = await mysql.createConnection({
-    //     user: 'root',
-    //     password: 'password',
-    //     database: 'lrss_2021-10-18'
-    // })
-    //
-    // if(req.body.email === 'test' && req.body.password === 'test') {
-    //     res.json('OK');
-    // } else {
-    //     res.json('error logging in');
-    // }
-    //
-    // const patients = await connection.query('')
+    const connection = await mysql.createConnection({
+        user: 'root',
+        password: 'password',
+        database: 'lrss_2021-10-18'
+    })
+
+    const patients = await connection.query('SELECT * FROM `patients`')
+    console.log(patients)
+
 })
 
 app.listen(port)
