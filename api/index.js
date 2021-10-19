@@ -18,9 +18,11 @@ app.post('/patients', async (req, res) => {
     })
 
     const patientData = await connection.query("SELECT `email`, `password` FROM `patients` WHERE `email` = '" + userLoginAttempt + "';")
-
-    res.json(patientData)
-    res.sendStatus(200)
+    if(patientData.length === 0) {
+        res.sendStatus(404)
+    } else {
+        res.sendStatus(200)
+    }
 })
 
 app.listen(port)
