@@ -7,7 +7,21 @@ const DoctorSelector = (props) => {
 
     useEffect(() => {
         // get data from api to populate doctor drop down selector
-        setAllDoctors(JSON.parse('[{"id":"1", "name":"Dr Test MBalls"}, {"id":"2", "name":"Dr Phil"}]'))
+        const url = 'http://localhost:3001/all-doctors'
+        const requestOptions = {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        }
+        fetch(url, requestOptions)
+            .then(response => {
+                console.log(response)
+                return response.json()
+            }).then(data => {
+                setAllDoctors(data)
+            }).catch(error => {
+                console.log('Something went wrong: ', error)
+            })
+        //setAllDoctors(JSON.parse('[{"id":"1", "name":"Dr Test MBalls"}, {"id":"2", "name":"Dr Phil"}]'))
     }, [])
 
     const handleSelect = evt => {

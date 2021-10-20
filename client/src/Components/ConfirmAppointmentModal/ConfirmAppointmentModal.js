@@ -21,6 +21,17 @@ const ConfirmAppointmentModal = (props) => {
         setIsOpen(false)
     }
 
+    const handleSubmit = () => {
+        const appointmentData = {
+            doctor: props.doctorSelected,
+            date: props.dateSelected.toLocaleDateString(),
+            timeSlot: props.appointmentSelected.timeSlot,
+            reasonForVisit: props.reasonForVisit
+        }
+
+        console.log(appointmentData)
+    }
+
     return (
         <>
             <Button className="mt-3" onClick={showModal} disabled={confirmDisabled}>Confirm Booking</Button>
@@ -33,7 +44,7 @@ const ConfirmAppointmentModal = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button className="btn-secondary" onClick={hideModal}>Cancel</Button>
-                    <Button className="btn-success">Confirm</Button>
+                    <Button className="btn-success" onClick={handleSubmit}>Confirm</Button>
                 </Modal.Footer>
             </Modal>
         </>

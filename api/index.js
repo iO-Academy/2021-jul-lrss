@@ -47,4 +47,13 @@ app.post('/login', async (req, res) => {
 
 })
 
+app.get('/all-doctors', async (request, response) => {
+    const connection = await mysql.createConnection({
+        user: 'root',
+        password: 'password',
+        database: 'lrss'
+    })
+    response.json(await connection.query("SELECT `id`, `name` FROM doctors;"))
+})
+
 app.listen(port)
