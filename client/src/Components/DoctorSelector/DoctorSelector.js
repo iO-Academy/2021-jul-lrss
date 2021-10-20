@@ -18,7 +18,7 @@ const DoctorSelector = (props) => {
     }, [])
 
     const handleSelect = evt => {
-        props.setDoctorSelected({name: evt.target.selectedIndex.textContent, id: evt.target.value})
+        props.setDoctorSelected({name: evt.target.options[evt.target.selectedIndex].textContent, id: parseInt(evt.target.value)})
     }
 
     return (

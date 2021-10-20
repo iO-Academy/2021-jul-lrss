@@ -4,19 +4,21 @@ import {FormGroup} from "react-bootstrap";
 const AppointmentSelector = (props) => {
 
     const [disabled, setDisabled] = useState(true)
-    const [appointmentsTaken, setAppointmentsTaken] = useState({
-        1: false,
-        2: false,
-        3: false,
-        4: false,
-        5: false,
-        6: false,
-        7: false,
-        8: false
-    })
+    const [appointmentsTaken, setAppointmentsTaken] = useState(
+        {
+            1: false,
+            2: false,
+            3: false,
+            4: false,
+            5: false,
+            6: false,
+            7: false,
+            8: false
+        })
 
     useEffect(() => {
-        if (props.doctorSelected !== '' && props.dateSelected !== ''){
+        if (props.doctorSelected.id !== 0 && props.dateSelected !== ''){
+            console.log(props.doctorSelected)
             setDisabled(false)
             const url = 'http://localhost:3001/appointments'
             const requestOptions = {
