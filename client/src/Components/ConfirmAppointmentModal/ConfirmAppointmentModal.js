@@ -6,7 +6,7 @@ const ConfirmAppointmentModal = (props) => {
 
     const [confirmDisabled, setConfirmDisabled] = useState(true)
     useEffect(() => {
-        if (props.doctorSelected === '' || props.dateSelected === '' || props.appointmentSelected.timeSlot === 0 || props.reasonForVisit === ''){
+        if (props.doctorSelected.id === 0 || props.dateSelected === '' || props.appointmentSelected.timeSlot === 0 || props.reasonForVisit === ''){
             setConfirmDisabled(true)
         } else {
             setConfirmDisabled(false)
@@ -23,13 +23,12 @@ const ConfirmAppointmentModal = (props) => {
 
     const handleSubmit = () => {
         const appointmentData = {
-            doctor: props.doctorSelected,
+            doctor: props.doctorSelected.id,
             date: props.dateSelected.toLocaleDateString(),
             timeSlot: props.appointmentSelected.timeSlot,
             reasonForVisit: props.reasonForVisit
         }
-
-        console.log(appointmentData)
+        //console.log(appointmentData)
     }
 
     return (
@@ -37,10 +36,10 @@ const ConfirmAppointmentModal = (props) => {
             <Button className="mt-3" onClick={showModal} disabled={confirmDisabled}>Confirm Booking</Button>
             <Modal show={isOpen} onHide={hideModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered={true}>
                 <ModalHeader>
-                    <ModalTitle>Appointment with {props.doctorSelected ?? 'Any Doctor'}</ModalTitle>
+                    <ModalTitle>Appointment with {props.doctorSelected.name}</ModalTitle>
                 </ModalHeader>
                 <Modal.Body>
-                    <p>Are you sure you want to book an appointment on {props.dateSelected ? props.dateSelected.toLocaleDateString() : ''} at {props.appointmentSelected.string} with {props.doctorSelected}?</p>
+                    <p>Are you sure you want to book an appointment on {props.dateSelected ? props.dateSelected.toLocaleDateString() : ''} at {props.appointmentSelected.string} with {props.doctorSelected.name}?</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button className="btn-secondary" onClick={hideModal}>Cancel</Button>

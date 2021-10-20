@@ -11,7 +11,7 @@ import ReasonForVisitTextArea from "../ReasonForVisitTextArea/ReasonForVisitText
 
 
 const PatientBookingPage = () => {
-    const [doctorSelected, setDoctorSelected] = useState('')
+    const [doctorSelected, setDoctorSelected] = useState({name: '', id: 0})
     const [dateSelected, setDateSelected] = useState('')
     const [appointmentSelected, setAppointmentSelected] = useState({string: '', timeSlot: 0})
     const [reasonForVisit, setReasonForVisit] = useState('')

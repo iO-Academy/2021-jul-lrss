@@ -16,17 +16,21 @@ app.use(session({
     resave: false
 }));
 
+async function getConnection() {
+    return mysql.createConnection({
+        user: 'root',
+        password: 'password',
+        database: 'lrss'
+    })
+}
+
 app.post('/login', async (req, res) => {
 
     const isDoctor = req.body.isDoctor
     const emailEntered = req.body.email
     const passwordEntered = req.body.password
 
-    const connection = await mysql.createConnection({
-        user: 'root',
-        password: 'password',
-        database: 'lrss_2021-10-18'
-    })
+    const connection = await getConnection()
 
     const checkLogin = async (databaseName) => {
         const userData = await connection.query("SELECT `email`, `password` FROM `" + databaseName + "` WHERE `email` = '" + emailEntered + "';")
@@ -48,12 +52,19 @@ app.post('/login', async (req, res) => {
 })
 
 app.get('/all-doctors', async (request, response) => {
-    const connection = await mysql.createConnection({
-        user: 'root',
-        password: 'password',
-        database: 'lrss'
-    })
+    const connection = await getConnection()
     response.json(await connection.query("SELECT `id`, `name` FROM doctors;"))
+})
+
+app.post('/appointments', async (request, response) => {
+    const connection = await getConnection()
+    const sqlQuery =
+        `SELECT appointments.id, appointments.time_slot, doctors.name AS doctor
+        FROM appointments
+        INNER JOIN doctors ON appointments.doctor_id = doctors.id
+        WHERE doctor_id = ` + request.body.doctor + ` AND date = '` + request.body.date + `';`
+    const data = await connection.query(sqlQuery)
+    response.json(data)
 })
 
 app.listen(port)
