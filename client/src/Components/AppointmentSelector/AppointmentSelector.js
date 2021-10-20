@@ -41,7 +41,7 @@ const AppointmentSelector = (props) => {
     }, [props.doctorSelected, props.dateSelected])
 
     const handleSelect = evt => {
-        props.setAppointmentSelected({string: evt.target.value, timeSlot: evt.target.selectedIndex})
+        props.setAppointmentSelected({string: evt.target.options[evt.target.selectedIndex].textContent, timeSlot: evt.target.selectedIndex})
     }
 
     return (

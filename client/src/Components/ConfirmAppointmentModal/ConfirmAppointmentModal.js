@@ -6,12 +6,12 @@ const ConfirmAppointmentModal = (props) => {
 
     const [confirmDisabled, setConfirmDisabled] = useState(true)
     useEffect(() => {
-        if (props.doctorSelected === '' || props.dateSelected === '' || props.appointmentSelected.timeSlot === 0){
+        if (props.doctorSelected === '' || props.dateSelected === '' || props.appointmentSelected.timeSlot === 0 || props.reasonForVisit === ''){
             setConfirmDisabled(true)
         } else {
             setConfirmDisabled(false)
         }
-    }, [props.doctorSelected, props.dateSelected, props.appointmentSelected])
+    }, [props.doctorSelected, props.dateSelected, props.appointmentSelected, props.reasonForVisit])
 
     const [isOpen, setIsOpen] = useState(false)
     const showModal = () => {

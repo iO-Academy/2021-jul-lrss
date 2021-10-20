@@ -6,6 +6,7 @@ import DatePicker from "../DatePicker/DatePicker";
 import AppointmentSelector from "../AppointmentSelector/AppointmentSelector";
 import DoctorSelector from "../DoctorSelector/DoctorSelector";
 import ConfirmAppointmentModal from "../ConfirmAppointmentModal/ConfirmAppointmentModal";
+import ReasonForVisitTextArea from "../ReasonForVisitTextArea/ReasonForVisitTextArea";
 
 
 
@@ -13,10 +14,10 @@ const PatientBookingPage = () => {
     const [doctorSelected, setDoctorSelected] = useState('')
     const [dateSelected, setDateSelected] = useState('')
     const [appointmentSelected, setAppointmentSelected] = useState({string: '', timeSlot: 0})
+    const [reasonForVisit, setReasonForVisit] = useState('')
 
     useEffect(() => {
         setAppointmentSelected({string: '', timeSlot: 0})
-
     }, [doctorSelected, dateSelected])
 
     return (
@@ -30,10 +31,15 @@ const PatientBookingPage = () => {
                     dateSelected={dateSelected}
                     appointmentSelected={appointmentSelected}
                     setAppointmentSelected={setAppointmentSelected}/>
+                <ReasonForVisitTextArea
+                    appointmentSelected={appointmentSelected}
+                    reasonForVisit={reasonForVisit}
+                    setReasonForVisit={setReasonForVisit}/>
                 <ConfirmAppointmentModal
                     doctorSelected={doctorSelected}
                     dateSelected={dateSelected}
-                    appointmentSelected={appointmentSelected}/>
+                    appointmentSelected={appointmentSelected}
+                    reasonForVisit={reasonForVisit}/>
             </Form>
         </main>
     )
