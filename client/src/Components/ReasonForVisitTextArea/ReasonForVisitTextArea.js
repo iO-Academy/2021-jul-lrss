@@ -22,7 +22,7 @@ const ReasonForVisitTextArea = (props) => {
                 className="form-control h-auto"
                 value={props.reasonForVisit}
                 onChange={handleChange}
-                rows={5}
+                rows={3}
                 disabled={isDisabled}/>
             <label htmlFor="appointmentSelector">What is the reason for your visit?</label>
         </FormGroup>

@@ -46,7 +46,7 @@ const ConfirmAppointmentModal = (props) => {
 
     return (
         <>
-            <Button className="mt-3" onClick={showModal} disabled={confirmDisabled}>Confirm Booking</Button>
+            <Button className="mt-2" onClick={showModal} disabled={confirmDisabled}>Confirm Booking</Button>
             <Modal show={isOpen} onHide={hideModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered={true}>
                 <ModalHeader>
                     <ModalTitle>Appointment with {props.doctorSelected.name}</ModalTitle>
