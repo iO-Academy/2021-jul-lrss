@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import './PatientProfileCard.css'
 
 const PatientProfileCard = (props) => {
 
@@ -29,7 +28,6 @@ const PatientProfileCard = (props) => {
         fetch(patientUrl, patientRequestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setUserData(data[0])
             })
             .catch()
@@ -42,6 +40,7 @@ const PatientProfileCard = (props) => {
         fetch(appointmentsUrl, appointmentRequestOptions)
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 if (data.length > 0){
                     setAppointmentData(data[0])
                     props.setAppointmentBooked(true)
@@ -87,8 +86,8 @@ const PatientProfileCard = (props) => {
                         <span className="text-muted">{appointmentData.id === 0 ? 'No Appointment Booked' : 'Appointment Booked'}</span>
                     </div>
                     <div className={"d-flex flex-column mt-3" + (props.appointmentBooked ? '' : ' d-none')}>
-                        <h5 className="m-0">You have an appointment with {appointmentData.doctor}</h5>
-                        <h5>at {displayTimeSlot(appointmentData.time_slot)} on {appointmentData.date}</h5>
+                        <h5 className="m-0">You have an appointment with {appointmentData.doctor ?? ''}</h5>
+                        <h5>at {displayTimeSlot(appointmentData.time_slot)} on {appointmentData.date ?? ''}</h5>
                     </div>
                 </div>
             </div>

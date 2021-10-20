@@ -73,9 +73,13 @@ const PatientBookingPage = () => {
                         dateSelected={dateSelected}
                         appointmentSelected={appointmentSelected}
                         reasonForVisit={reasonForVisit}
-                        setAppointmentBooked={setAppointmentBooked} />
+                        setAppointmentBooked={setAppointmentBooked}
+                        toggleDisplay={toggleDisplay} />
                 </div>
                 <PatientProfileCard
+                    doctorSelected={doctorSelected}
+                    dateSelected={dateSelected}
+                    appointmentSelected={appointmentSelected}
                     appointmentBooked={appointmentBooked}
                     setAppointmentBooked={setAppointmentBooked}
                     profileDisplay={profileDisplay} />

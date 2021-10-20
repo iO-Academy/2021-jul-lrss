@@ -37,9 +37,11 @@ const ConfirmAppointmentModal = (props) => {
         fetch(url, requestOptions)
             .then(response => {
                 if (response.status === 200){
-                    //console.log('success')
+                    props.setAppointmentBooked(true)
+                    props.toggleDisplay()
+                    hideModal()
                 } else {
-                    //console.log('error')
+                    console.log('error')
                 }
             }).catch()
     }
