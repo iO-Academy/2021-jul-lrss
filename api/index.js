@@ -12,7 +12,7 @@ app.use(express.json());
 app.set('trust proxy', 1)
 
 app.use(session({
-    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    secret: "hJkrhgODMXjvTpsSNYhjQtBwAB",
     saveUninitialized:true,
     cookie: { maxAge: oneDay },
     resave: false
@@ -27,10 +27,16 @@ app.post('/register', async (req, res) => {
     })
 
     try {
+        const userName = req.body.name
         const userEmail = req.body.email
+        const userMobile = req.body.mobile
         const userPassword = req.body.password
+        const userGender = req.body.gender
+        const userDOB = req.body.dob
         const hash = await bcrypt.hash(userPassword, 12)
-        await connection.query("INSERT INTO `patients` (`email`, `hash`) VALUES ('email: " + userEmail + "', hash: " + hash + "');")
+        await connection.query("INSERT INTO `patients` (`name`, `email`, `mobile`,`hash`, `gender`, `dob`) " +
+            "VALUES ('" + userName + "', '" + userEmail + "', '" + userMobile + "', '" + hash + "', '" + userGender + "', '"
+            + userDOB + "');")
         res.status(200).send('Registration complete')
     } catch(e) {
         console.log(e)
