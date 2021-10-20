@@ -115,7 +115,7 @@ const RegisterPage = (props) => {
                 </Form.Group>
                 <Form.Group className="mb-3 genderInput" controlId="formBasicGender">
                     <label className="col-sm-4">Gender</label>
-                    <label className="col-sm-4 checkbox-inline">
+                    <label className="col-sm-4 checkbox-inline custom-label">
                         <input id="genMale" type="checkbox" value="male" checked={checkedMale} onChange={updateMale}/>Male
                     </label>
                     <label className="col-sm-4 checkbox-inline">
@@ -125,12 +125,12 @@ const RegisterPage = (props) => {
                     <span className="text-danger">{genderError}</span>
                 </Form.Group>
                 <Form.Group controlId="dob">
-                    <Form.Label>Select date of birth</Form.Label>
+                    <Form.Label className="custom-label">Select date of birth</Form.Label>
                     <Form.Control type="date" name="dob" selected={dob} value={dob} onChange={handleDobChange}/>
                     <span className="text-danger">{dobError}</span>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                <Form.Group className="mb-3">
+                    <Form.Label className="custom-label">Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange} value={email}/>
                     <span className="text-danger">{emailError}</span>
                     <Form.Text className="text-muted">
@@ -147,7 +147,7 @@ const RegisterPage = (props) => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}
                                   value={password}/>
-                    <Form.Label>Please confirm your password</Form.Label>
+                    <Form.Label className="custom-label">Please confirm your password</Form.Label>
                     <Form.Control type="password" placeholder="Confirm password" onChange={handlePasswordCheckChange}
                                   value={passwordCheck}/>
                     <span className="text-danger">{passwordError}</span>
