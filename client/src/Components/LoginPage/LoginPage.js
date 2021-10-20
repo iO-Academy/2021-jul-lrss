@@ -21,6 +21,10 @@ const LoginPage = (props) => {
         setIsDoctor(!isDoctor);
     }
 
+    const goToRegisterPage = () => {
+        props.history.push('/register')
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
         const url = 'http://localhost:3001/login'
@@ -51,11 +55,9 @@ const LoginPage = (props) => {
 
     return (
         <div className="loginContainer">
-
-
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                    <label>I would like to log in as a:</label>
+                    <label class="form-label">I would like to log in as a:</label>
                     <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
                             name="isDoctor" id="isDoctor" onChange={handleDoctorChange} value={isDoctor}>
                         <option class="dropdown-item" value="true">doctor</option>
@@ -75,8 +77,8 @@ const LoginPage = (props) => {
                     <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange} value={password} />
                 </Form.Group>
                 <Form.Group className="mb-3 buttonContainer" controlId="formBasicEmail">
-                    <Button variant="primary" type="submit">Submit</Button>
-                    <Button variant="secondary">Register as a new patient</Button>
+                    <Button variant="primary" className="btn btn-primary" type="submit">Submit</Button>
+                    <Button onClick={goToRegisterPage}>Register as a new patient</Button>
                 </Form.Group>
                 <p className={ !error ? "hidden " : ""}>Sorry, those log in details were incorrect.</p>
             </Form>

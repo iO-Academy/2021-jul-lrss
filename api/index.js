@@ -38,7 +38,7 @@ app.post('/login', async (req, res) => {
             res.sendStatus(404)
         }
     }
-    
+
     if(isDoctor) {
         await checkLogin('doctors')
     } else {
