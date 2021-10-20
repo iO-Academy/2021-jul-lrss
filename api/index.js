@@ -1,14 +1,14 @@
 const express = require('express')
 const mysql = require('promise-mysql')
 const cors = require('cors')
+const session = require('express-session');
 const app = express()
 const port = 3001
-const session = require('express-session');
-const router = express.Router();
+const oneDay = 1000 * 60 * 60 * 24;
+
 app.use(cors())
 app.use(express.json());
 app.set('trust proxy', 1)
-const oneDay = 1000 * 60 * 60 * 24;
 app.use(session({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
     saveUninitialized:true,
