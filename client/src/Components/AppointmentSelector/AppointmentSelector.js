@@ -19,12 +19,12 @@ const AppointmentSelector = (props) => {
     useEffect(() => {
         if (props.doctorSelected.id !== 0 && props.dateSelected !== ''){
             setDisabled(false)
-            const url = 'http://localhost:3001/get-appointments'
+            const url = 'http://localhost:3001/get-doctor-appointments-for-day'
             const requestOptions = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    doctor: props.doctorSelected.id,
+                    doctorID: props.doctorSelected.id,
                     date: props.dateSelected.toLocaleDateString()
                 })
             }

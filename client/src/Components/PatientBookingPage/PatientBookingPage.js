@@ -20,9 +20,9 @@ const PatientBookingPage = () => {
     const [profileDisplay, setProfileDisplay] = useState('')
     const [appointmentBookerDisplay, setAppointmentBookerDisplay] = useState(' d-none')
     const [toggleViewButtonText, setToggleViewButtonText] = useState('Book Appointment')
+    const [appointmentBooked, setAppointmentBooked] = useState(false)
 
-    const toggleDisplay = (evt) => {
-        evt.preventDefault()
+    const toggleDisplay = () => {
         if (profileDisplay === ''){
             setProfileDisplay(' d-none')
             setAppointmentBookerDisplay('')
@@ -34,36 +34,51 @@ const PatientBookingPage = () => {
         }
     }
 
+    const handleClick = evt => {
+        evt.preventDefault()
+        toggleDisplay()
+    }
+
     useEffect(() => {
         setAppointmentSelected({string: '', timeSlot: 0})
     }, [doctorSelected, dateSelected])
+
+    useEffect(() => {
+        if (appointmentBooked){
+          //
+        }
+    }, [appointmentBooked])
 
     return (
         <main className="d-flex justify-content-center align-items-center text-center vh-100">
             <Form className="col-8">
                 <div className="d-flex flex-row flex-nowrap justify-content-between mb-3">
                     <h1 className="">LRSS Health</h1>
-                    <Button className="btn btn-secondary m-0" onClick={toggleDisplay}>{toggleViewButtonText}</Button>
+                    <Button className="btn btn-secondary m-0" onClick={handleClick} disabled={appointmentBooked}>{toggleViewButtonText}</Button>
                 </div>
                 <div className={appointmentBookerDisplay}>
-                    <DoctorSelector setDoctorSelected={setDoctorSelected}/>
-                    <DatePicker setDateSelected={setDateSelected}/>
+                    <DoctorSelector setDoctorSelected={setDoctorSelected} />
+                    <DatePicker setDateSelected={setDateSelected} />
                     <AppointmentSelector
                         doctorSelected={doctorSelected}
                         dateSelected={dateSelected}
                         appointmentSelected={appointmentSelected}
-                        setAppointmentSelected={setAppointmentSelected}/>
+                        setAppointmentSelected={setAppointmentSelected} />
                     <ReasonForVisitTextArea
                         appointmentSelected={appointmentSelected}
                         reasonForVisit={reasonForVisit}
-                        setReasonForVisit={setReasonForVisit}/>
+                        setReasonForVisit={setReasonForVisit} />
                     <ConfirmAppointmentModal
                         doctorSelected={doctorSelected}
                         dateSelected={dateSelected}
                         appointmentSelected={appointmentSelected}
-                        reasonForVisit={reasonForVisit}/>
+                        reasonForVisit={reasonForVisit}
+                        setAppointmentBooked={setAppointmentBooked} />
                 </div>
-                <PatientProfileCard profileDisplay={profileDisplay}/>
+                <PatientProfileCard
+                    appointmentBooked={appointmentBooked}
+                    setAppointmentBooked={setAppointmentBooked}
+                    profileDisplay={profileDisplay} />
             </Form>
         </main>
     )

@@ -1,37 +1,94 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './PatientProfileCard.css'
 
 const PatientProfileCard = (props) => {
+
+    const [userData, setUserData] = useState(
+        {
+            name: '',
+            dob: '',
+            gender: '',
+            email: '',
+            mobile: '',
+    })
+
+    const [appointmentData, setAppointmentData] = useState(
+        {
+            id: 0,
+            doctor: '',
+            date: '',
+            time_slot: 0
+    })
+
+    useEffect(() => {
+        const patientUrl = 'http://localhost:3001/get-patient'
+        const patientRequestOptions = {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        }
+        fetch(patientUrl, patientRequestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setUserData(data[0])
+            })
+            .catch()
+
+        const appointmentsUrl = 'http://localhost:3001/get-patient-appointments'
+        const appointmentRequestOptions = {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        }
+        fetch(appointmentsUrl, appointmentRequestOptions)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0){
+                    setAppointmentData(data[0])
+                    props.setAppointmentBooked(true)
+                }
+            })
+            .catch()
+    }, [])
+
+    const displayTimeSlot = (time_slot) => {
+        switch (time_slot){
+            case 1:
+                return '09:00 am'
+            case 2:
+                return '10:00 am'
+            case 3:
+                return '11:00 am'
+            case 4:
+                return '12:00 noon'
+            case 5:
+                return '13:00 pm'
+            case 6:
+                return '14:00 pm'
+            case 7:
+                return '15:00 pm'
+            case 8:
+                return '16:00 pm'
+        }
+    }
+
+    const editProfile = evt => {
+        evt.preventDefault()
+    }
+
     return (
         <div className={"container mt-4 mb-4 p-3 d-flex justify-content-center" + props.profileDisplay}>
             <div className="card p-4">
                 <div className=" image d-flex flex-column justify-content-center align-items-center">
-                    <button className="btn btn-secondary">
+                    <button className="btn btn-secondary" onClick={editProfile}>
                         <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100"/>
                     </button>
-                    <span className="name mt-3">Eleanor Pena</span>
-                    <span className="idd">@eleanorpena</span>
+                    <span className="name mt-3">{userData.name}</span>
                     <div className="d-flex flex-row justify-content-center align-items-center gap-2">
-                        <span className="idd1">Oxc4c16a645_b21a</span>
-                        <span><i className="fa fa-copy"></i></span>
+                        <span className="text-muted">{appointmentData.id === 0 ? 'No Appointment Booked' : 'Appointment Booked'}</span>
                     </div>
-                    <div className="d-flex flex-row justify-content-center align-items-center mt-3">
-                        <span className="number">1069 <span className="follow">Followers</span></span>
-                    </div>
-                    <div className=" d-flex mt-2">
-                        <button className="btn1 btn-dark">Edit Profile</button>
-                    </div>
-                    <div className="text mt-3">
-                        <span>Eleanor Pena is a creator of minimalistic x bold graphics and digital artwork. Artist/ Creative Director by Day #NFT minting@ with FND night.</span>
-                    </div>
-                    <div className="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
-                        <span><i className="fa fa-twitter"></i></span>
-                        <span><i className="fa fa-facebook-f"></i></span>
-                        <span><i className="fa fa-instagram"></i></span>
-                        <span><i className="fa fa-linkedin"></i></span>
-                    </div>
-                    <div className=" px-2 rounded mt-4 date ">
-                        <span className="join">Joined May,2021</span>
+                    <div className={"d-flex flex-column mt-3" + (props.appointmentBooked ? '' : ' d-none')}>
+                        <h5 className="m-0">You have an appointment with {appointmentData.doctor}</h5>
+                        <h5>at {displayTimeSlot(appointmentData.time_slot)} on {appointmentData.date}</h5>
                     </div>
                 </div>
             </div>
