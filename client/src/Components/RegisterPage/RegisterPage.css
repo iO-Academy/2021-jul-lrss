@@ -10,6 +10,10 @@
 
 form {
     background-color: #fff;
-    padding: 30px;
+    padding: 25px;
     border-radius: 10px;
+}
+
+.genderInput input {
+    margin-right: 23px;
 }
