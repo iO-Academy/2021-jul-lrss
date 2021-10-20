@@ -28,21 +28,20 @@ const ConfirmAppointmentModal = (props) => {
             timeSlot: props.appointmentSelected.timeSlot,
             reasonForVisit: props.reasonForVisit
         }
-        console.log(appointmentData)
         const url = 'http://localhost:3001/book-appointment'
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(appointmentData)
         }
-        console.log(requestOptions)
         fetch(url, requestOptions)
             .then(response => {
-                console.log(response)
-                return response.json()
-            }).then(data => {
-                console.log(data)
-        }).catch()
+                if (response.status === 200){
+                    //console.log('success')
+                } else {
+                    //console.log('error')
+                }
+            }).catch()
     }
 
     return (

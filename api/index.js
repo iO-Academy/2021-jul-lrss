@@ -69,9 +69,10 @@ app.post('/get-appointments', async (request, response) => {
 
 app.post('/book-appointment', async (request, response) => {
     const connection = await getConnection()
+    const userID = 1; // need to get userID from session variable
     const sqlQuery =
         `INSERT INTO appointments (patient_id, doctor_id, date, time_slot, reason_for_visit)
-        VALUES (1, ` + request.body.doctor + `, '` + request.body.dateString + `', ` + request.body.timeSlot + `, '` + request.body.reasonForVisit + `');`
+        VALUES (` + userID + `, ` + request.body.doctor + `, '` + request.body.dateString + `', ` + request.body.timeSlot + `, '` + request.body.reasonForVisit + `');`
     const success = await connection.query(sqlQuery)
     if (success){
         response.sendStatus(200)

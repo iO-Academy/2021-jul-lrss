@@ -32,7 +32,6 @@ const AppointmentSelector = (props) => {
                 .then(response => {
                     return response.json()
                 }).then(takenAppointments => {
-                    console.log(takenAppointments)
                     const appointmentArray= {
                         1: false,
                         2: false,

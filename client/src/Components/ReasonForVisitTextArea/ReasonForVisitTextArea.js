@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Form, FormGroup} from "react-bootstrap";
+import {FormGroup} from "react-bootstrap";
 
 const ReasonForVisitTextArea = (props) => {
     const [isDisabled, setIsDisabled] = useState(true)
