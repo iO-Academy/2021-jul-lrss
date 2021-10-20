@@ -23,13 +23,13 @@ app.post('/register', async (req, res) => {
     const connection = await mysql.createConnection({
         user: 'root',
         password: 'password',
-        database: 'lrss_2021-10-18'
+        database: 'lrss'
     })
 
     try {
         const userName = req.body.name
         const userEmail = req.body.email
-        const userMobile = req.body.mobile
+        const userMobile = req.body.phoneNumber
         const userPassword = req.body.password
         const userGender = req.body.gender
         const userDOB = req.body.dob
@@ -47,18 +47,33 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
 
+    const connection = await mysql.createConnection({
+        user: 'root',
+        password: 'password',
+        database: 'lrss'
+    })
+
     const isDoctor = req.body.isDoctor
     const emailEntered = req.body.email
     const passwordEntered = req.body.password
 
     const checkLogin = async (tableName) => {
-        const userData = await connection.query("SELECT `email`, `password` FROM `" + tableName + "` WHERE `email` = '" + emailEntered + "';")
-        if(userData.length !== 0 && userData[0].password === passwordEntered) {
-            res.sendStatus(200)
-            const sessionID = req.sessionID;
-            console.log(sessionID)
-        } else {
-            res.sendStatus(404)
+        try {
+            const userData = await connection.query("SELECT `email`, `hash` FROM `" + tableName + "` WHERE `email` = '"
+                + emailEntered + "';")
+            if (userData) {
+                const validPass = await bcrypt.compare(passwordEntered, userData[0].hash)
+                if (validPass) {
+                    res.status(200).json('Valid login credentials entered.')
+                } else {
+                    res.status(401).json('Incorrect password.')
+                }
+            } else {
+                res.status(404).json('User not found.')
+            }
+        } catch(e) {
+            console.log(e)
+            res.status(500).send('The site isn\'t working correctly')
         }
     }
 
