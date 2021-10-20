@@ -1,0 +1,6 @@
+.IDEA
+.DS_STORE
+api/node_modules/
+client/node_modules/
+
+
