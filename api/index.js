@@ -34,6 +34,7 @@ app.post('/register', async (req, res) => {
         const userGender = req.body.gender
         const userDOB = req.body.dob
         const hash = await bcrypt.hash(userPassword, 12)
+
         await connection.query("INSERT INTO `patients` (`name`, `email`, `mobile`,`hash`, `gender`, `dob`) " +
             "VALUES ('" + userName + "', '" + userEmail + "', '" + userMobile + "', '" + hash + "', '" + userGender + "', '"
             + userDOB + "');")
@@ -50,8 +51,8 @@ app.post('/login', async (req, res) => {
     const emailEntered = req.body.email
     const passwordEntered = req.body.password
 
-    const checkLogin = async (databaseName) => {
-        const userData = await connection.query("SELECT `email`, `password` FROM `" + databaseName + "` WHERE `email` = '" + emailEntered + "';")
+    const checkLogin = async (tableName) => {
+        const userData = await connection.query("SELECT `email`, `password` FROM `" + tableName + "` WHERE `email` = '" + emailEntered + "';")
         if(userData.length !== 0 && userData[0].password === passwordEntered) {
             res.sendStatus(200)
             const sessionID = req.sessionID;
