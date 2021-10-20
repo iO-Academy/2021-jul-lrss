@@ -61,7 +61,7 @@ app.post('/login', async (req, res) => {
         try {
             const userData = await connection.query("SELECT `email`, `hash` FROM `" + tableName + "` WHERE `email` = '"
                 + emailEntered + "';")
-            if (userData) {
+            if (userData.length !== 0) {
                 const validPass = await bcrypt.compare(passwordEntered, userData[0].hash)
                 if (validPass) {
                     res.status(200).json('Valid login credentials entered.')
