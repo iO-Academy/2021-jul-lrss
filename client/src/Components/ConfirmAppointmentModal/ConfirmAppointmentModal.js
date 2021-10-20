@@ -24,11 +24,25 @@ const ConfirmAppointmentModal = (props) => {
     const handleSubmit = () => {
         const appointmentData = {
             doctor: props.doctorSelected.id,
-            date: props.dateSelected.toLocaleDateString(),
+            dateString: props.dateSelected.toLocaleDateString(),
             timeSlot: props.appointmentSelected.timeSlot,
             reasonForVisit: props.reasonForVisit
         }
-        //console.log(appointmentData)
+        console.log(appointmentData)
+        const url = 'http://localhost:3001/book-appointment'
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(appointmentData)
+        }
+        console.log(requestOptions)
+        fetch(url, requestOptions)
+            .then(response => {
+                console.log(response)
+                return response.json()
+            }).then(data => {
+                console.log(data)
+        }).catch()
     }
 
     return (

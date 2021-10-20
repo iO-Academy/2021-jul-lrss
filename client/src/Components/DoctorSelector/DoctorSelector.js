@@ -6,7 +6,7 @@ const DoctorSelector = (props) => {
     const [allDoctors, setAllDoctors] = useState([])
 
     useEffect(() => {
-        const url = 'http://localhost:3001/all-doctors'
+        const url = 'http://localhost:3001/get-doctors'
         const requestOptions = {
             method: 'GET',
             headers: {'Content-Type': 'application/json'},

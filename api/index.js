@@ -51,12 +51,12 @@ app.post('/login', async (req, res) => {
 
 })
 
-app.get('/all-doctors', async (request, response) => {
+app.get('/get-doctors', async (request, response) => {
     const connection = await getConnection()
     response.json(await connection.query("SELECT `id`, `name` FROM doctors;"))
 })
 
-app.post('/appointments', async (request, response) => {
+app.post('/get-appointments', async (request, response) => {
     const connection = await getConnection()
     const sqlQuery =
         `SELECT appointments.id, appointments.time_slot, doctors.name AS doctor
@@ -65,6 +65,19 @@ app.post('/appointments', async (request, response) => {
         WHERE doctor_id = ` + request.body.doctor + ` AND date = '` + request.body.date + `';`
     const data = await connection.query(sqlQuery)
     response.json(data)
+})
+
+app.post('/book-appointment', async (request, response) => {
+    const connection = await getConnection()
+    const sqlQuery =
+        `INSERT INTO appointments (patient_id, doctor_id, date, time_slot, reason_for_visit)
+        VALUES (1, ` + request.body.doctor + `, '` + request.body.dateString + `', ` + request.body.timeSlot + `, '` + request.body.reasonForVisit + `');`
+    const success = await connection.query(sqlQuery)
+    if (success){
+        response.sendStatus(200)
+    } else {
+        response.sendStatus(500)
+    }
 })
 
 app.listen(port)

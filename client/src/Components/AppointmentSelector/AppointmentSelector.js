@@ -18,9 +18,8 @@ const AppointmentSelector = (props) => {
 
     useEffect(() => {
         if (props.doctorSelected.id !== 0 && props.dateSelected !== ''){
-            console.log(props.doctorSelected)
             setDisabled(false)
-            const url = 'http://localhost:3001/appointments'
+            const url = 'http://localhost:3001/get-appointments'
             const requestOptions = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
