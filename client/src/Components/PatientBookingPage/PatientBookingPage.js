@@ -15,8 +15,9 @@ const PatientBookingPage = () => {
     const [appointmentSelected, setAppointmentSelected] = useState({string: '', timeSlot: 0})
 
     useEffect(() => {
-        console.log(appointmentSelected)
-    }, [appointmentSelected])
+        setAppointmentSelected({string: '', timeSlot: 0})
+
+    }, [doctorSelected, dateSelected])
 
     return (
         <main className="d-flex justify-content-center align-items-center text-center vh-100">

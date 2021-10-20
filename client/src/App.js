@@ -4,6 +4,7 @@ import LoginPage from "./Components/LoginPage/LoginPage";
 import DoctorDayPlannerPage from "./Components/DoctorDayPlannerPage/DoctorDayPlannerPage";
 import PatientBookingPage from "./Components/PatientBookingPage/PatientBookingPage";
 import DoctorAppointmentsPage from "./Components/DoctorAppointmentPage/DoctorAppointmentsPage";
+import RegisterPage from "./Components/RegisterPage/RegisterPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
               <Route path="/day-planner" component={DoctorDayPlannerPage} />
               <Route path="/appointment-notes" component={DoctorAppointmentsPage} />
               <Route path="/appointments" component={PatientBookingPage} />
+              <Route path="/register" component={RegisterPage} />
           </Switch>
       </Router>
   );

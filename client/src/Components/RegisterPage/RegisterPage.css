@@ -1,0 +1,28 @@
+.registerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('./login-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+form {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.genderInput input {
+    margin-right: 23px;
+}
+
+.custom-label {
+    padding-top: 20px;
+}
+
+span {
+    display: inline-block;
+    padding-top: 10px;
+}

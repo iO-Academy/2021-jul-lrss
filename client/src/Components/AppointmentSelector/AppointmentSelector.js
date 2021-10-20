@@ -46,16 +46,17 @@ const AppointmentSelector = (props) => {
 
     return (
         <FormGroup className="form-floating">
-            <select className="form-control" id="appointmentSelector" disabled={disabled} onChange={handleSelect}>
+            <select className="form-control" id="appointmentSelector" disabled={disabled} onChange={handleSelect}
+                    value={props.appointmentSelected.timeSlot}>
                 <option value=''> </option>
-                <option disabled={appointmentsTaken[1]}>9:00 - 10:00</option>
-                <option disabled={appointmentsTaken[2]}>10:00 - 11:00</option>
-                <option disabled={appointmentsTaken[3]}>11:00 - 12:00</option>
-                <option disabled={appointmentsTaken[4]}>12:00 - 13:00</option>
-                <option disabled={appointmentsTaken[5]}>13:00 - 14:00</option>
-                <option disabled={appointmentsTaken[6]}>14:00 - 15:00</option>
-                <option disabled={appointmentsTaken[7]}>15:00 - 16:00</option>
-                <option disabled={appointmentsTaken[8]}>16:00 - 17:00</option>
+                <option value={1} disabled={appointmentsTaken[1]}>9:00 - 10:00</option>
+                <option value={2} disabled={appointmentsTaken[2]}>10:00 - 11:00</option>
+                <option value={3} disabled={appointmentsTaken[3]}>11:00 - 12:00</option>
+                <option value={4} disabled={appointmentsTaken[4]}>12:00 - 13:00</option>
+                <option value={5} disabled={appointmentsTaken[5]}>13:00 - 14:00</option>
+                <option value={6} disabled={appointmentsTaken[6]}>14:00 - 15:00</option>
+                <option value={7} disabled={appointmentsTaken[7]}>15:00 - 16:00</option>
+                <option value={8} disabled={appointmentsTaken[8]}>16:00 - 17:00</option>
             </select>
             <label htmlFor="appointmentSelector">Select an Appointment</label>
         </FormGroup>

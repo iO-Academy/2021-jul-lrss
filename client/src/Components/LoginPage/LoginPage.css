@@ -1,0 +1,38 @@
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('./login-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+form {
+    background-color: #fff;
+    padding: 30px;
+    padding-bottom: 0;
+    border-radius: 10px;
+    margin-bottom: 0;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.form-select {
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 1rem;
+    padding: .375rem .75rem;
+}
+
+button {
+    margin-top: 0.55rem;
+}
