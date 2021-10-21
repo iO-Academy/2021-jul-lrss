@@ -9,6 +9,7 @@ const RegisterPage = (props) => {
     const [dob, setDob] = useState('')
     const [checkedMale, setCheckedMale] = useState(false)
     const [checkedFemale, setCheckedFemale] = useState(false)
+    const [gender, setGender] = useState('')
     const [password, setPassword] = useState('')
     const [passwordCheck, setPasswordCheck] = useState('')
     const [passwordError, setPasswordError] = useState('')
@@ -18,16 +19,6 @@ const RegisterPage = (props) => {
     const [emailError, setEmailError] = useState('')
     const [dobError, setDobError] = useState('')
     const [genderError, setGenderError] = useState('')
-
-    const updateMale = () => {
-        setCheckedMale(!checkedMale);
-        setCheckedFemale(false);
-    }
-
-    const updateFemale = () => {
-        setCheckedFemale(!checkedFemale);
-        setCheckedMale(false)
-    }
 
     const handleNameChange = event => {
         setName(event.target.value)
@@ -53,6 +44,18 @@ const RegisterPage = (props) => {
         setPhoneNumber(event.target.value)
     }
 
+    const updateGender = () => {
+        if(gender === 'male') {
+            setGender('female')
+            setCheckedFemale(true);
+            setCheckedMale(false)
+        } else {
+            setGender('male')
+            setCheckedFemale(false);
+            setCheckedMale(true)
+        }
+    }
+
     const validate = (event) => {
         event.preventDefault()
         if (!name) {
@@ -73,13 +76,11 @@ const RegisterPage = (props) => {
         if (nameError || genderError || dobError || phoneNumberError || passwordError) {
             return false;
         }
-        return true;
+        submit()
     }
 
     const submit = () => {
-        if (validate) {
             const url = 'http://localhost:3001/register'
-            const gender = () => checkedMale ? 'male' : 'female'
             const requestOptions = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -101,7 +102,6 @@ const RegisterPage = (props) => {
                 .catch(error => {
                     console.log('Something went wrong: ', error)
                 })
-        }
     }
 
     return (
@@ -116,11 +116,11 @@ const RegisterPage = (props) => {
                 <Form.Group className="mb-3 genderInput" controlId="formBasicGender">
                     <label className="col-sm-4">Gender</label>
                     <label className="col-sm-4 checkbox-inline custom-label">
-                        <input id="genMale" type="checkbox" value="male" checked={checkedMale} onChange={updateMale}/>Male
+                        <input id="genMale" type="checkbox" value="male" checked={checkedMale} onChange={updateGender}/>Male
                     </label>
                     <label className="col-sm-4 checkbox-inline">
                         <input id="genFemale" type="checkbox" value="female" checked={checkedFemale}
-                               onChange={updateFemale}/>Female
+                               onChange={updateGender}/>Female
                     </label>
                     <span className="text-danger">{genderError}</span>
                 </Form.Group>
