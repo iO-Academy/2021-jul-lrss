@@ -21,10 +21,17 @@ app.use(session({
 const credValidate = [
     body('email', 'Please enter an e-mail address').isEmail().trim().escape().normalizeEmail(),
     body('password').isLength({ min: 8 }).withMessage('Your password must be at least 8 characters')
-        .matches('[0-9]').withMessage('Your password must contain a number').matches('[A-Z]')
-        .withMessage('Your password must contain an uppercase letter').trim().escape()]
+        .matches('[0-9]').withMessage('Your password must contain a number').matches('(?=.*[a-z])(?=.*[A-Z])')
+        .withMessage('Your password must contain a lowercase and an uppercase letter').trim().escape(),
+    body('dob', 'Please enter a valid date format').isDate().escape().trim(),
+    body('gender', 'Please choose either male or female').matches('(fe)?male').escape().trim(),
+    body('phoneNumber', 'Please enter a valid UK phone number')
+        .matches('(((\\+44)? ?(\\(0\\))? ?)|(0))( ?[0-9]{3,4}){3}').trim().escape(),
+    body('name', 'Please provide a valid name')
+        .matches('^(([A-Za-z]+[,.]?[ ]?|[a-z]+[\'-]?)+)$').trim().escape()]
 
-app.post('/register', ...credValidate, async (req, res) => {
+app.post('/register', ...credValidate, async (req,
+                                              res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         return res.status(422).json({errors: errors.array()})
@@ -46,8 +53,8 @@ app.post('/register', ...credValidate, async (req, res) => {
             const hash = await bcrypt.hash(userPassword, 12)
 
             await connection.query("INSERT INTO `patients` (`name`, `email`, `mobile`,`hash`, `gender`, `dob`) " +
-                "VALUES ('" + userName + "', '" + userEmail + "', '" + userMobile + "', '" + hash + "', '" + userGender + "', '"
-                + userDOB + "');")
+                "VALUES ('" + userName + "', '" + userEmail + "', '" + userMobile + "', '" + hash + "', '" + userGender
+                + "', '" + userDOB + "');")
             res.status(200).send('Registration complete')
         } catch(e) {
             console.log(e)
@@ -70,8 +77,8 @@ app.post('/login', async (req, res) => {
 
     const checkLogin = async (tableName) => {
         try {
-            const userData = await connection.query("SELECT `email`, `hash` FROM `" + tableName + "` WHERE `email` = '"
-                + emailEntered + "';")
+            const userData = await connection.query("SELECT `email`, `hash` FROM `" + tableName + "` WHERE `email`" +
+                " = '" + emailEntered + "';")
             if (userData.length !== 0) {
                 const validPass = await bcrypt.compare(passwordEntered, userData[0].hash)
                 if (validPass) {
