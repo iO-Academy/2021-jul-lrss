@@ -75,7 +75,11 @@ app.post('/register', ...credValidate, async (req,
             }
         } catch(e) {
             console.log(e)
-            res.status(500).send('Registration failed')
+            if(e.sqlState === '23000') {
+                res.status(403).send('Account already exists')
+            } else {
+                res.status(500).send('Registration failed')
+            }
         }
     }
 })
