@@ -7,7 +7,6 @@ import AppointmentSelector from "../AppointmentSelector/AppointmentSelector";
 import DoctorSelector from "../DoctorSelector/DoctorSelector";
 import ConfirmAppointmentModal from "../ConfirmAppointmentModal/ConfirmAppointmentModal";
 import ReasonForVisitTextArea from "../ReasonForVisitTextArea/ReasonForVisitTextArea";
-import PatientProfileCard from "../PatientProfileCard/PatientProfileCard";
 import {Button} from "react-bootstrap";
 
 
@@ -17,26 +16,10 @@ const PatientBookingPage = () => {
     const [dateSelected, setDateSelected] = useState('')
     const [appointmentSelected, setAppointmentSelected] = useState({string: '', timeSlot: 0})
     const [reasonForVisit, setReasonForVisit] = useState('')
-    const [profileDisplay, setProfileDisplay] = useState('')
-    const [appointmentBookerDisplay, setAppointmentBookerDisplay] = useState(' d-none')
-    const [toggleViewButtonText, setToggleViewButtonText] = useState('Book Appointment')
     const [appointmentBooked, setAppointmentBooked] = useState(false)
-
-    const toggleDisplay = () => {
-        if (profileDisplay === ''){
-            setProfileDisplay(' d-none')
-            setAppointmentBookerDisplay('')
-            setToggleViewButtonText('Back to Profile')
-        } else {
-            setProfileDisplay('')
-            setAppointmentBookerDisplay(' d-none')
-            setToggleViewButtonText('Book Appointment')
-        }
-    }
 
     const handleClick = evt => {
         evt.preventDefault()
-        toggleDisplay()
     }
 
     useEffect(() => {
@@ -54,9 +37,9 @@ const PatientBookingPage = () => {
             <Form className="col-8">
                 <div className="d-flex flex-row flex-nowrap justify-content-between mb-3">
                     <h1 className="">LRSS Health</h1>
-                    <Button className="btn btn-secondary m-0" onClick={handleClick} disabled={appointmentBooked}>{toggleViewButtonText}</Button>
+                    <a className="btn btn-secondary m-0" href="/profile">Back to Profile</a>
                 </div>
-                <div className={appointmentBookerDisplay}>
+                <div>
                     <DoctorSelector setDoctorSelected={setDoctorSelected} />
                     <DatePicker setDateSelected={setDateSelected} />
                     <AppointmentSelector
@@ -73,16 +56,8 @@ const PatientBookingPage = () => {
                         dateSelected={dateSelected}
                         appointmentSelected={appointmentSelected}
                         reasonForVisit={reasonForVisit}
-                        setAppointmentBooked={setAppointmentBooked}
-                        toggleDisplay={toggleDisplay} />
+                        setAppointmentBooked={setAppointmentBooked}/>
                 </div>
-                <PatientProfileCard
-                    doctorSelected={doctorSelected}
-                    dateSelected={dateSelected}
-                    appointmentSelected={appointmentSelected}
-                    appointmentBooked={appointmentBooked}
-                    setAppointmentBooked={setAppointmentBooked}
-                    profileDisplay={profileDisplay} />
             </Form>
         </main>
     )

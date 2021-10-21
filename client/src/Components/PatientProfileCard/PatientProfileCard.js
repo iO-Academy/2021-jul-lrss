@@ -43,7 +43,6 @@ const PatientProfileCard = (props) => {
                 console.log(data)
                 if (data.length > 0){
                     setAppointmentData(data[0])
-                    props.setAppointmentBooked(true)
                 }
             })
             .catch()
@@ -81,7 +80,7 @@ const PatientProfileCard = (props) => {
     }
 
     return (
-        <div className={"container mt-4 mb-4 p-3 d-flex justify-content-center" + props.profileDisplay}>
+        <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
             <div className="card p-4">
                 <div className=" image d-flex flex-column justify-content-center align-items-center">
                     <button className="btn btn-secondary" onClick={editProfile}>
@@ -91,7 +90,7 @@ const PatientProfileCard = (props) => {
                     <div className="d-flex flex-row justify-content-center align-items-center gap-2">
                         <span className="text-muted">{appointmentData.id === 0 ? 'No Appointment Booked' : 'Appointment Booked'}</span>
                     </div>
-                    <div className={"d-flex flex-column mt-3" + (props.appointmentBooked ? '' : ' d-none')}>
+                    <div className={"d-flex flex-column mt-3 text-center" + (appointmentData.id !== 0 ? '' : ' d-none')}>
                         <h5 className="m-0">You have an appointment with {appointmentData.doctor ?? ''}</h5>
                         <h5>at {displayTimeSlot(appointmentData.time_slot)} on {appointmentData.date ?? ''}</h5>
                         <button className="btn btn-danger" onClick={cancelAppointment}>Cancel</button>
