@@ -4,44 +4,58 @@ import {FormGroup} from "react-bootstrap";
 const AppointmentSelector = (props) => {
 
     const [disabled, setDisabled] = useState(true)
-    const [appointmentsTaken, setAppointmentsTaken] = useState({
-        1: false,
-        2: false,
-        3: false,
-        4: false,
-        5: false,
-        6: false,
-        7: false,
-        8: false
-    })
+    const [appointmentsTaken, setAppointmentsTaken] = useState(
+        {
+            1: false,
+            2: false,
+            3: false,
+            4: false,
+            5: false,
+            6: false,
+            7: false,
+            8: false
+        })
 
     useEffect(() => {
-        if (props.doctorSelected !== '' && props.dateSelected !== '' && props.appointmentSelected !== ''){
+        if (props.doctorSelected.id !== 0 && props.dateSelected !== ''){
             setDisabled(false)
-            const appointmentArray= {
-                1: false,
-                2: false,
-                3: false,
-                4: false,
-                5: false,
-                6: false,
-                7: false,
-                8: false
+            const url = 'http://localhost:3001/get-doctor-appointments-for-day'
+            const requestOptions = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    doctorID: props.doctorSelected.id,
+                    date: props.dateSelected.toLocaleDateString()
+                })
             }
-            // get taken appointments from api instead
-            const takenAppointments = JSON.parse('[{"time_slot":"1"}, {"time_slot":"6"}]')
-
-            takenAppointments.forEach(takenAppointment => {
-                appointmentArray[takenAppointment.time_slot] = true
+            fetch(url, requestOptions)
+                .then(response => {
+                    return response.json()
+                }).then(takenAppointments => {
+                    const appointmentArray= {
+                        1: false,
+                        2: false,
+                        3: false,
+                        4: false,
+                        5: false,
+                        6: false,
+                        7: false,
+                        8: false
+                    }
+                    takenAppointments.forEach(takenAppointment => {
+                        appointmentArray[takenAppointment.time_slot] = true
+                    })
+                    setAppointmentsTaken(appointmentArray)
+            }).catch(error => {
+                console.log('Something went wrong: ', error)
             })
-            setAppointmentsTaken(appointmentArray)
         } else {
             setDisabled(true)
         }
     }, [props.doctorSelected, props.dateSelected])
 
     const handleSelect = evt => {
-        props.setAppointmentSelected({string: evt.target.value, timeSlot: evt.target.selectedIndex})
+        props.setAppointmentSelected({string: evt.target.options[evt.target.selectedIndex].textContent, timeSlot: evt.target.selectedIndex})
     }
 
     return (
