@@ -142,7 +142,7 @@ app.get('/get-patient', async (request, response) => {
     const connection = await getConnection()
     const userID = 1; // need to get userID from session variable
     const sqlQuery =
-        `SELECT id, name, email, mobile, password, gender, dob
+        `SELECT id, name, email, mobile, hash, gender, dob
         FROM patients
         WHERE id = ` + userID
     const data = await connection.query(sqlQuery)
@@ -159,6 +159,19 @@ app.get('/get-patient-appointments', async (request, response) => {
         WHERE appointments.patient_id = ` + userID
     const data = await connection.query(sqlQuery)
     response.json(data)
+})
+
+app.post('/cancel-appointment', async (request, response) => {
+    const connection = await getConnection()
+    const userID = 1; // need to get userID from session variable
+    const sqlQuery =
+        `DELETE FROM appointments WHERE patient_id = ` + userID + ` AND date = '` + request.body.date + `';`
+    const success = await connection.query(sqlQuery)
+    if (success){
+        response.sendStatus(200)
+    } else {
+        response.sendStatus(500)
+    }
 })
 
 app.listen(port)

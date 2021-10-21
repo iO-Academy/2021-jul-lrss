@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import ConfirmCancelModal from "../ConfirmCancelModal/ConfirmCancelModal";
 
 const PatientProfileCard = (props) => {
 
@@ -40,7 +41,6 @@ const PatientProfileCard = (props) => {
         fetch(appointmentsUrl, appointmentRequestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 if (data.length > 0){
                     setAppointmentData(data[0])
                 }
@@ -75,10 +75,6 @@ const PatientProfileCard = (props) => {
         evt.preventDefault()
     }
 
-    const cancelAppointment = evt => {
-        evt.preventDefault()
-    }
-
     return (
         <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
             <div className="card p-4">
@@ -93,7 +89,9 @@ const PatientProfileCard = (props) => {
                     <div className={"d-flex flex-column mt-3 text-center" + (appointmentData.id !== 0 ? '' : ' d-none')}>
                         <h5 className="m-0">You have an appointment with {appointmentData.doctor ?? ''}</h5>
                         <h5>at {displayTimeSlot(appointmentData.time_slot)} on {appointmentData.date ?? ''}</h5>
-                        <button className="btn btn-danger" onClick={cancelAppointment}>Cancel</button>
+                        <ConfirmCancelModal
+                            appointmentData={appointmentData}
+                            setAppointmentData={setAppointmentData}/>
                     </div>
                     <div className={"mt-3" + (appointmentData.id !== 0 ? ' d-none' : '')}>
                         <a className="btn btn-primary" href="/book-appointment">Book Appointment</a>
