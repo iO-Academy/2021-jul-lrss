@@ -6,7 +6,6 @@ const bcrypt = require('bcryptjs')
 const {body, validationResult} = require('express-validator')
 const app = express()
 const port = 3001
-const oneDay = 1000 * 60 * 60 * 24;
 app.use(cors())
 app.use(express.json());
 app.set('trust proxy', 1)
@@ -15,7 +14,6 @@ let userSession
 app.use(session({
     secret: "hJkrhgODMXjvTpsSNYhjQtBwAB",
     saveUninitialized: true,
-    cookie: { maxAge: oneDay },
     resave: false,
     isLoggedIn: false,
     userObject: {id: 0, name: ''}
