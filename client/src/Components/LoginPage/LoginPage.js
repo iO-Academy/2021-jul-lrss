@@ -74,8 +74,8 @@ const LoginPage = (props) => {
                     <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange} value={password} />
                 </Form.Group>
                 <Form.Group className="mb-3 buttonContainer" controlId="formBasicEmail">
-                    <Button variant="primary" className="btn btn-primary" type="submit">Submit</Button>
-                    <Button onClick={goToRegisterPage}>Register as a new patient</Button>
+                    <Button variant="primary" type="submit">Submit</Button>
+                    <Button onClick={goToRegisterPage} className="btn-secondary">Register as a new patient</Button>
                 </Form.Group>
                 <p className={ !error ? "hidden " : ""}>Sorry, those log in details were incorrect.</p>
             </Form>
