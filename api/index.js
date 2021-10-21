@@ -30,7 +30,7 @@ async function getConnection() {
 }
 
 const credValidate = [
-    body('email', 'Please enter an e-mail address').isEmail().trim().normalizeEmail(),
+    body('email', 'Please enter an e-mail address').isEmail().trim().escape(),
     body('password').isLength({min: 8}).withMessage('Your password must be at least 8 characters')
         .matches('[0-9]').withMessage('Your password must contain a number').matches('(?=.*[a-z])(?=.*[A-Z])')
         .withMessage('Your password must contain a lowercase and an uppercase letter').trim().escape(),
