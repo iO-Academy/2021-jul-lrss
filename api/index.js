@@ -59,9 +59,11 @@ app.get('/get-doctors', async (request, response) => {
 app.post('/get-doctor-appointments-for-day', async (request, response) => {
     const connection = await getConnection()
     const sqlQuery =
-        `SELECT appointments.id, appointments.time_slot, doctors.name AS doctor
+        `SELECT appointments.id, appointments.time_slot, doctors.name AS doctor, patients.name AS patient, 
+            patients.dob AS patient_dob, patients.gender AS patient_gender, appointments.reason_for_visit
         FROM appointments
         INNER JOIN doctors ON appointments.doctor_id = doctors.id
+        INNER JOIN patients ON appointments.patient_id = patients.id
         WHERE doctor_id = ` + request.body.doctorID + ` AND date = '` + request.body.date + `';`
     const data = await connection.query(sqlQuery)
     response.json(data)
