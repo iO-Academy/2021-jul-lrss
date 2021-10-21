@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# Version 5446
+# Version 4541
 #
-# https://www.sequelpro.com/
+# http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
 # Host: 127.0.0.1 (MySQL 5.7.34)
-# Database: lrss_2021-10-18
-# Generation Time: 2021-10-20 15:06:25 +0000
+# Database: lrss
+# Generation Time: 2021-10-21 08:05:56 +0000
 # ************************************************************
 
 
@@ -15,7 +15,6 @@
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-SET NAMES utf8mb4;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
@@ -35,7 +34,6 @@ CREATE TABLE `appointment_notes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-
 # Dump of table appointments
 # ------------------------------------------------------------
 
@@ -45,11 +43,11 @@ CREATE TABLE `appointments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `patient_id` int(10) unsigned NOT NULL,
   `doctor_id` int(10) unsigned NOT NULL,
-  `date` date NOT NULL,
+  `date` varchar(30) NOT NULL DEFAULT '',
   `time_slot` int(3) unsigned NOT NULL,
+  `reason_for_visit` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 
 
 # Dump of table doctors
@@ -100,7 +98,6 @@ CREATE TABLE `patients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-
 # Dump of table prescriptions
 # ------------------------------------------------------------
 
@@ -115,8 +112,6 @@ CREATE TABLE `prescriptions` (
   `details` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

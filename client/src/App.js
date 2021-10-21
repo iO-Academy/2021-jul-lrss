@@ -3,6 +3,7 @@ import './App.css';
 import LoginPage from "./Components/LoginPage/LoginPage";
 import DoctorDayPlannerPage from "./Components/DoctorDayPlannerPage/DoctorDayPlannerPage";
 import PatientBookingPage from "./Components/PatientBookingPage/PatientBookingPage";
+import PatientProfilePage from "./Components/PatientProfilePage/PatientProfilePage";
 import DoctorAppointmentsPage from "./Components/DoctorAppointmentPage/DoctorAppointmentsPage";
 import RegisterPage from "./Components/RegisterPage/RegisterPage";
 
@@ -13,7 +14,8 @@ function App() {
               <Route exact path="/" component={LoginPage} />
               <Route path="/day-planner" component={DoctorDayPlannerPage} />
               <Route path="/appointment-notes" component={DoctorAppointmentsPage} />
-              <Route path="/appointments" component={PatientBookingPage} />
+              <Route path="/profile" component={PatientProfilePage} />
+              <Route path="/book-appointment" component={PatientBookingPage} />
               <Route path="/register" component={RegisterPage} />
           </Switch>
       </Router>
