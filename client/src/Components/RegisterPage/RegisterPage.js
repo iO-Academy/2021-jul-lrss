@@ -80,7 +80,6 @@ const RegisterPage = (props) => {
     }
 
     const submit = () => {
-            console.log('hoi')
             const url = 'http://localhost:3001/register'
             const requestOptions = {
                 method: 'POST',
@@ -94,7 +93,6 @@ const RegisterPage = (props) => {
                     password: password
                 })
             }
-            console.log(requestOptions)
             fetch(url, requestOptions)
                 .then(response => {
                     if (response.status === 200) {
