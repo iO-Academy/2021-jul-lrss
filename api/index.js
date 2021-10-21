@@ -68,9 +68,10 @@ app.post('/register', ...credValidate, async (req,
                 "VALUES ('" + userName + "', '" + userEmail + "', '" + userMobile + "', '" + hash + "', '" + userGender
                 + "', '" + userDOB + "');")
             if (success){
-                const userID = await connection.query(`SELECT id FROM patients WHERE name = '` + userName + `';`)[0]
+                const userID = await connection.query(`SELECT id FROM patients WHERE email = '` + userEmail + `';`)
+                console.log("USER ID TEST: " + userID.id + "\n\n\n\n")
                 userSession.isLoggedIn = true
-                userSession.userObject = {id: userID, name: userName}
+                userSession.userObject = {id: userID.id, name: userName}
                 res.status(200).send('Registration complete')
             }
         } catch(e) {
