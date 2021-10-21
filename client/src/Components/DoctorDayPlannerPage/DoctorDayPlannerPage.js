@@ -2,9 +2,14 @@ import React, {useEffect, useState} from "react";
 import {forEach} from "react-bootstrap/ElementChildren";
 import DatePicker from "../DatePicker/DatePicker";
 import './DoctorDayPlannerPage.css'
+import ConfirmAppointmentModal from "../ConfirmAppointmentModal/ConfirmAppointmentModal";
+import AppointmentInfoModal from "./AppointmentInfoModal";
+import {Button} from "react-bootstrap";
+// import TableRow from "./TableRow";
 
 const DoctorDayPlannerPage = () => {
     const [dateSelected, setDateSelected] = useState(new Date())
+    const [moduleDisplay, setModuleDisplay] = useState(false)
     // const [appointmentDetails, setAppointmentDetails] = useState([])
     const [dayOverview, setDayOverview] = useState(
         {
@@ -41,7 +46,20 @@ const DoctorDayPlannerPage = () => {
                 return 'none'
         }
     }
-    var appointments = []
+
+    const toggleDisplay = () => {
+        if (moduleDisplay){
+            setModuleDisplay(false)
+        } else {
+            setModuleDisplay(true)
+        }
+    }
+
+    const handleClick = evt => {
+        evt.preventDefault()
+        toggleDisplay()
+    }
+
 
     useEffect( () => {
         const url = 'http://localhost:3001/get-doctor-appointments-for-day'
@@ -79,9 +97,61 @@ const DoctorDayPlannerPage = () => {
     return (
         <div>
             <DatePicker setDateSelected={setDateSelected}/>
-                <table>
-                    <tableRow dayOverview={dayOverview} displayTimeSlot={displayTimeSlot}/>
-                </table>
+
+            <table>
+                    <tr>
+                        <td>09:00</td>
+                        <td>{dayOverview[1].patient ? dayOverview[1].patient : ''}</td>
+                        <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
+                            name={dayOverview[1].patient ? dayOverview[1].patient : ''}
+                            reasonForVisit={dayOverview[1].reason_for_visit ? dayOverview[1].reason_for_visit : ''}
+                            dob={dayOverview[1].patient_dob ? dayOverview[1].patient_dob : ''}
+                            gender={dayOverview[1].patient_gender ? dayOverview[1].patient_gender : ''}
+                        />
+                    </tr>
+
+
+
+                {/*<tr>*/}
+                {/*    <td>09:00</td>*/}
+                {/*    <td>{dayOverview[2].patient ? dayOverview[2].patient : ''}</td>*/}
+                {/*</tr>*/}
+                {/*<tr>*/}
+                {/*    <td>09:00</td>*/}
+                {/*    <td>{dayOverview[3].patient ? dayOverview[3].patient : ''}</td>*/}
+                {/*</tr>*/}
+                {/*<tr>*/}
+                {/*    <td>09:00</td>*/}
+                {/*    <td>{dayOverview[4].patient ? dayOverview[4].patient : ''}</td>*/}
+                {/*</tr>*/}
+                {/*<tr>*/}
+                {/*    <td>09:00</td>*/}
+                {/*    <td>{dayOverview[5].patient ? dayOverview[5].patient : ''}</td>*/}
+                {/*</tr>*/}
+                {/*<tr>*/}
+                {/*    <td>09:00</td>*/}
+                {/*    <td>{dayOverview[6].patient ? dayOverview[6].patient : ''}</td>*/}
+                {/*</tr>*/}
+                {/*<tr>*/}
+                {/*    <td>09:00</td>*/}
+                {/*    <td>{dayOverview[7].patient ? dayOverview[7].patient : ''}</td>*/}
+                {/*</tr>*/}
+                {/*<tr>*/}
+                {/*    <td>09:00</td>*/}
+                {/*    <td>{dayOverview[8].patient ? dayOverview[8].patient : ''}</td>*/}
+                {/*</tr>*/}
+            </table>
+
+
+
+
+
+            {/*dayOverview.forEach(appointment => {*/}
+            {/*    <table>*/}
+            {/*        <TableRow appointment=appointment displayTimeSlot={displayTimeSlot} />*/}
+            {/*    </table>*/}
+            {/*}*/}
+
         </div>
     )
 }
