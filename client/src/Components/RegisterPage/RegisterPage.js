@@ -96,7 +96,7 @@ const RegisterPage = (props) => {
             fetch(url, requestOptions)
                 .then(response => {
                     if (response.status === 200) {
-                        props.history.push('/PatientBookingPage')
+                        props.history.push('/profile')
                     }
                 })
                 .catch(error => {

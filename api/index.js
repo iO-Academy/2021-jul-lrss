@@ -64,12 +64,15 @@ app.post('/register', ...credValidate, async (req,
             const userDOB = req.body.dob
             const hash = await bcrypt.hash(userPassword, 12)
 
-            await connection.query("INSERT INTO `patients` (`name`, `email`, `mobile`,`hash`, `gender`, `dob`) " +
+            const success = await connection.query("INSERT INTO `patients` (`name`, `email`, `mobile`,`hash`, `gender`, `dob`) " +
                 "VALUES ('" + userName + "', '" + userEmail + "', '" + userMobile + "', '" + hash + "', '" + userGender
                 + "', '" + userDOB + "');")
-            userSession.isLoggedIn = true
-            userSession.userObject = {id: 2}
-            res.status(200).send('Registration complete')
+            if (success){
+                const userID = await connection.query(`SELECT id FROM patients WHERE name = '` + userName + `';`)[0]
+                userSession.isLoggedIn = true
+                userSession.userObject = {id: userID, name: userName}
+                res.status(200).send('Registration complete')
+            }
         } catch(e) {
             console.log(e)
             res.status(500).send('Registration failed')

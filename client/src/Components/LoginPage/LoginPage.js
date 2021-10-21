@@ -40,7 +40,7 @@ const LoginPage = (props) => {
             .then(response => {
                 if(response.status === 200 && !isDoctor) {
                     setError(false)
-                    props.history.push('/appointments')
+                    props.history.push('/profile')
                 } else if (response.status === 200 && isDoctor) {
                     setError(false)
                     props.history.push('/day-planner')

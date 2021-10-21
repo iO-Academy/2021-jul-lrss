@@ -41,6 +41,7 @@ const PatientProfileCard = (props) => {
         fetch(appointmentsUrl, appointmentRequestOptions)
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 if (data.length > 0){
                     setAppointmentData(data[0])
                 }
@@ -59,13 +60,13 @@ const PatientProfileCard = (props) => {
             case 4:
                 return '12:00 noon'
             case 5:
-                return '13:00 pm'
+                return '13:00'
             case 6:
-                return '14:00 pm'
+                return '14:00'
             case 7:
-                return '15:00 pm'
+                return '15:00'
             case 8:
-                return '16:00 pm'
+                return '16:00'
             default:
                 return 'none'
         }
