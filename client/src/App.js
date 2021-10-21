@@ -15,7 +15,7 @@ function App() {
               <Route path="/day-planner" component={DoctorDayPlannerPage} />
               <Route path="/appointment-notes" component={DoctorAppointmentsPage} />
               <Route path="/profile" component={PatientProfilePage} />
-              <Route path="/appointments" component={PatientBookingPage} />
+              <Route path="/book-appointment" component={PatientBookingPage} />
               <Route path="/register" component={RegisterPage} />
           </Switch>
       </Router>

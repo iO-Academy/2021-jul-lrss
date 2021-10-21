@@ -95,6 +95,9 @@ const PatientProfileCard = (props) => {
                         <h5>at {displayTimeSlot(appointmentData.time_slot)} on {appointmentData.date ?? ''}</h5>
                         <button className="btn btn-danger" onClick={cancelAppointment}>Cancel</button>
                     </div>
+                    <div className={"mt-3" + (appointmentData.id !== 0 ? ' d-none' : '')}>
+                        <a className="btn btn-primary" href="/book-appointment">Book Appointment</a>
+                    </div>
                 </div>
             </div>
         </div>

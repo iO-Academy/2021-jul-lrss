@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Button, Modal, ModalTitle} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
+import { Redirect } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 const ConfirmAppointmentModal = (props) => {
 
@@ -21,6 +23,8 @@ const ConfirmAppointmentModal = (props) => {
         setIsOpen(false)
     }
 
+    let history = useHistory();  // declare here, inside a React component.
+
     const handleSubmit = () => {
         const appointmentData = {
             doctor: props.doctorSelected.id,
@@ -38,8 +42,7 @@ const ConfirmAppointmentModal = (props) => {
             .then(response => {
                 if (response.status === 200){
                     props.setAppointmentBooked(true)
-                    props.toggleDisplay()
-                    hideModal()
+                    history.push("/profile")
                 } else {
                     console.log('error')
                 }
