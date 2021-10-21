@@ -7,9 +7,6 @@ import AppointmentSelector from "../AppointmentSelector/AppointmentSelector";
 import DoctorSelector from "../DoctorSelector/DoctorSelector";
 import ConfirmAppointmentModal from "../ConfirmAppointmentModal/ConfirmAppointmentModal";
 import ReasonForVisitTextArea from "../ReasonForVisitTextArea/ReasonForVisitTextArea";
-import {Button} from "react-bootstrap";
-
-
 
 const PatientBookingPage = () => {
     const [doctorSelected, setDoctorSelected] = useState({name: '', id: 0})
@@ -18,17 +15,12 @@ const PatientBookingPage = () => {
     const [reasonForVisit, setReasonForVisit] = useState('')
     const [appointmentBooked, setAppointmentBooked] = useState(false)
 
-    const handleClick = evt => {
-        evt.preventDefault()
-    }
-
     useEffect(() => {
         setAppointmentSelected({string: '', timeSlot: 0})
     }, [doctorSelected, dateSelected])
 
     useEffect(() => {
         if (appointmentBooked){
-          //
         }
     }, [appointmentBooked])
 
