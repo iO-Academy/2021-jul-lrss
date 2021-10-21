@@ -41,7 +41,6 @@ const PatientProfileCard = (props) => {
         fetch(appointmentsUrl, appointmentRequestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 if (data.length > 0){
                     setAppointmentData(data[0])
                 }
