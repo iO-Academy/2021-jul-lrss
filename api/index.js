@@ -3,10 +3,10 @@ const mysql = require('promise-mysql')
 const cors = require('cors')
 const session = require('express-session');
 const bcrypt = require('bcryptjs')
+const {body, validationResult} = require('express-validator')
 const app = express()
 const port = 3001
 const oneDay = 1000 * 60 * 60 * 24;
-
 app.use(cors())
 app.use(express.json());
 app.set('trust proxy', 1)
@@ -18,30 +18,41 @@ app.use(session({
     resave: false
 }));
 
-app.post('/register', async (req, res) => {
+const credValidate = [
+    body('email', 'Please enter an e-mail address').isEmail().trim().escape().normalizeEmail(),
+    body('password').isLength({ min: 8 }).withMessage('Your password must be at least 8 characters')
+        .matches('[0-9]').withMessage('Your password must contain a number').matches('[A-Z]')
+        .withMessage('Your password must contain an uppercase letter').trim().escape()]
 
-    const connection = await mysql.createConnection({
-        user: 'root',
-        password: 'password',
-        database: 'lrss'
-    })
+app.post('/register', ...credValidate, async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(422).json({errors: errors.array()})
+    }
+    else {
+        const connection = await mysql.createConnection({
+            user: 'root',
+            password: 'password',
+            database: 'lrss'
+        })
 
-    try {
-        const userName = req.body.name
-        const userEmail = req.body.email
-        const userMobile = req.body.phoneNumber
-        const userPassword = req.body.password
-        const userGender = req.body.gender
-        const userDOB = req.body.dob
-        const hash = await bcrypt.hash(userPassword, 12)
+        try {
+            const userName = req.body.name
+            const userEmail = req.body.email
+            const userMobile = req.body.phoneNumber
+            const userPassword = req.body.password
+            const userGender = req.body.gender
+            const userDOB = req.body.dob
+            const hash = await bcrypt.hash(userPassword, 12)
 
-        await connection.query("INSERT INTO `patients` (`name`, `email`, `mobile`,`hash`, `gender`, `dob`) " +
-            "VALUES ('" + userName + "', '" + userEmail + "', '" + userMobile + "', '" + hash + "', '" + userGender + "', '"
-            + userDOB + "');")
-        res.status(200).send('Registration complete')
-    } catch(e) {
-        console.log(e)
-        res.status(500).send('Registration failed')
+            await connection.query("INSERT INTO `patients` (`name`, `email`, `mobile`,`hash`, `gender`, `dob`) " +
+                "VALUES ('" + userName + "', '" + userEmail + "', '" + userMobile + "', '" + hash + "', '" + userGender + "', '"
+                + userDOB + "');")
+            res.status(200).send('Registration complete')
+        } catch(e) {
+            console.log(e)
+            res.status(500).send('Registration failed')
+        }
     }
 })
 
