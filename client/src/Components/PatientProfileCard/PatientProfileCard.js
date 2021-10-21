@@ -67,10 +67,16 @@ const PatientProfileCard = (props) => {
                 return '15:00 pm'
             case 8:
                 return '16:00 pm'
+            default:
+                return 'none'
         }
     }
 
     const editProfile = evt => {
+        evt.preventDefault()
+    }
+
+    const cancelAppointment = evt => {
         evt.preventDefault()
     }
 
@@ -79,7 +85,7 @@ const PatientProfileCard = (props) => {
             <div className="card p-4">
                 <div className=" image d-flex flex-column justify-content-center align-items-center">
                     <button className="btn btn-secondary" onClick={editProfile}>
-                        <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100"/>
+                        <img src="https://i.imgur.com/wvxPV9S.png" alt="" height="100" width="100"/>
                     </button>
                     <span className="name mt-3">{userData.name}</span>
                     <div className="d-flex flex-row justify-content-center align-items-center gap-2">
@@ -88,6 +94,7 @@ const PatientProfileCard = (props) => {
                     <div className={"d-flex flex-column mt-3" + (props.appointmentBooked ? '' : ' d-none')}>
                         <h5 className="m-0">You have an appointment with {appointmentData.doctor ?? ''}</h5>
                         <h5>at {displayTimeSlot(appointmentData.time_slot)} on {appointmentData.date ?? ''}</h5>
+                        <button className="btn btn-danger" onClick={cancelAppointment}>Cancel</button>
                     </div>
                 </div>
             </div>
