@@ -1,51 +1,147 @@
 import React, {useEffect, useState} from "react";
-import AppointmentOverview from "../DoctorAppointmentPage/AppointmentOverview";
 import {forEach} from "react-bootstrap/ElementChildren";
-
+import DatePicker from "../DatePicker/DatePicker";
+import './DoctorDayPlannerPage.css'
 
 const DoctorDayPlannerPage = () => {
-    const [dateSelected, setDateSelected] = useState('01/11/2021')
-    const [dayOverview, setDayOverview] = useState('')
-        console.log(dateSelected)
-        useEffect (() => {
-        const url = 'http://localhost:3001/get-appointments'
-        // const requestOptions = {
-        //     headers: {'Content-Type': 'application/json'},
-        //     mode: 'cors'
-        // };
+    const [dateSelected, setDateSelected] = useState(new Date())
+    // const [appointmentDetails, setAppointmentDetails] = useState([])
+    const [dayOverview, setDayOverview] = useState(
+        [
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+        ]
+    )
 
-        fetch(url)
+    const displayTimeSlot = (time_slot) => {
+        switch (time_slot){
+            case 1:
+                return '09:00 am'
+            case 2:
+                return '10:00 am'
+            case 3:
+                return '11:00 am'
+            case 4:
+                return '12:00 noon'
+            case 5:
+                return '13:00 pm'
+            case 6:
+                return '14:00 pm'
+            case 7:
+                return '15:00 pm'
+            case 8:
+                return '16:00 pm'
+            default:
+                return 'none'
+        }
+    }
+
+    useEffect( () => {
+        const url = 'http://localhost:3001/get-doctor-appointments-for-day'
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                doctorID: 3,
+                date: (dateSelected === '' ? new Date().toLocaleDateString() : dateSelected.toLocaleDateString())
+            })
+        }
+        fetch(url, requestOptions)
             .then(response => response.json())
             .then(data => {
-                const appointments = data.filter(appointment => {
-                        if (appointment.date === dateSelected) {
-                            return appointment
-                        }
-                    })
-                console.log(appointments)
-                setDayOverview(appointments)
+                if(data.length > 0) {
+                    const appointment1 = data.filter(appointment => appointment.time_slot === 1)
+                    const appointment2 = data.filter(appointment => appointment.time_slot === 2)
+                    const appointment3 = data.filter(appointment => appointment.time_slot === 3)
+                    const appointment4 = data.filter(appointment => appointment.time_slot === 4)
+                    const appointment5 = data.filter(appointment => appointment.time_slot === 5)
+                    const appointment6 = data.filter(appointment => appointment.time_slot === 6)
+                    const appointment7 = data.filter(appointment => appointment.time_slot === 7)
+                    const appointment8 = data.filter(appointment => appointment.time_slot === 8)
+                    const appointments = [
+                        appointment1,
+                        appointment2,
+                        appointment3,
+                        appointment4,
+                        appointment5,
+                        appointment6,
+                        appointment7,
+                        appointment8
+                    ]
+                    setDayOverview(appointments)
+                }
             })
+            .catch(error => console.log(error))
+    }, [dateSelected])
 
-    }, []);
+    // useEffect(() => {
+    //    if(dayOverview[0].doctor !== '') {
+    //
+    //        let appointmentSlot1 = ''
+    //            dayOverview.forEach(appointment => {
+    //            if (appointment.time_slot == 1) {
+    //                appointmentSlot1 = appointment.patient
+    //            }
+    //        })
+    //    }
+    // }, [dayOverview])
 
     return (
         <div>
-            <h1>{dateSelected}</h1>
-                <AppointmentOverview setDateSelected={setDateSelected}/>
-                <div className="dayOverview">
-                    {dayOverview.map(appointment => {
-                    return <p>{appointment.name}</p>
-                })}
-                </div>
+            <DatePicker setDateSelected={setDateSelected}/>
+            <div>
+                <p>{dayOverview[0].patient}</p>
+                {/*<table>*/}
+                {/*    <tr>*/}
+                {/*        <td>9:00</td>*/}
+                {/*        <td>{appointmentDetails[0]}</td>*/}
+                {/*        <p>reason for visit</p>*/}
+                {/*    </tr>*/}
+                {/*    <tr>*/}
+                {/*        <td>10:00</td>*/}
+                {/*        <td>{appointmentDetails[1]}</td>*/}
+                {/*        <p>reason for visit</p>*/}
+                {/*    </tr>*/}
+                {/*    <tr>*/}
+                {/*        <td>11:00</td>*/}
+                {/*        <td>{appointmentDetails[3]}</td>*/}
+                {/*        <p>reason for visit</p>*/}
+                {/*    </tr>*/}
+                {/*    <tr>*/}
+                {/*        <td>12:00</td>*/}
+                {/*        <td>{appointmentDetails[4]}</td>*/}
+                {/*        <p>reason for visit</p>*/}
+                {/*    </tr>*/}
+                {/*    <tr>*/}
+                {/*        <td>13:00</td>*/}
+                {/*        <td>{appointmentDetails[5]}</td>*/}
+                {/*        <p>reason for visit</p>*/}
+                {/*    </tr>*/}
+                {/*    <tr>*/}
+                {/*        <td>14:00</td>*/}
+                {/*        <td>{appointmentDetails[6]}</td>*/}
+                {/*        <p>reason for visit</p>*/}
+                {/*    </tr>*/}
+                {/*    <tr>*/}
+                {/*        <td>15:00</td>*/}
+                {/*        <td>{appointmentDetails[7]}</td>*/}
+                {/*        <p>reason for visit</p>*/}
+                {/*    </tr>*/}
+                {/*    <tr>*/}
+                {/*        <td>16:00</td>*/}
+                {/*        <td>{getAppointmentDetails(8)}</td>*/}
+                {/*        <p>reason for visit</p>*/}
+                {/*    </tr>*/}
+                {/*</table>*/}
+            </div>
         </div>
-//view of the calendar to choose the day
-        //default to current day
-        //patients name
-        //appointment time
-        //reason for appointment on clicking on the appointment
-        //blank spaces for unbooked appointments
     )
-
 }
 
 export default DoctorDayPlannerPage
