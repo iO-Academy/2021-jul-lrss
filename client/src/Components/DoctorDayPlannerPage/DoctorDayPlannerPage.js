@@ -7,16 +7,6 @@ const DoctorDayPlannerPage = () => {
     const [dateSelected, setDateSelected] = useState(new Date())
     // const [appointmentDetails, setAppointmentDetails] = useState([])
     const [dayOverview, setDayOverview] = useState(
-        [
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-        ]
     )
 
     const displayTimeSlot = (time_slot) => {
@@ -41,6 +31,7 @@ const DoctorDayPlannerPage = () => {
                 return 'none'
         }
     }
+    var appointments = []
 
     useEffect( () => {
         const url = 'http://localhost:3001/get-doctor-appointments-for-day'
@@ -56,6 +47,7 @@ const DoctorDayPlannerPage = () => {
             .then(response => response.json())
             .then(data => {
                 if(data.length > 0) {
+                    console.log('hi')
                     const appointment1 = data.filter(appointment => appointment.time_slot === 1)
                     const appointment2 = data.filter(appointment => appointment.time_slot === 2)
                     const appointment3 = data.filter(appointment => appointment.time_slot === 3)
@@ -64,7 +56,8 @@ const DoctorDayPlannerPage = () => {
                     const appointment6 = data.filter(appointment => appointment.time_slot === 6)
                     const appointment7 = data.filter(appointment => appointment.time_slot === 7)
                     const appointment8 = data.filter(appointment => appointment.time_slot === 8)
-                    const appointments = [
+                    console.log(appointment1)
+                    data = [
                         appointment1,
                         appointment2,
                         appointment3,
@@ -74,10 +67,14 @@ const DoctorDayPlannerPage = () => {
                         appointment7,
                         appointment8
                     ]
-                    setDayOverview(appointments)
+                    setDayOverview(data)
                 }
             })
             .catch(error => console.log(error))
+    }, [dateSelected])
+
+    useEffect(() => {
+        console.log('dayoverview', dayOverview)
     }, [dateSelected])
 
     // useEffect(() => {
@@ -96,7 +93,12 @@ const DoctorDayPlannerPage = () => {
         <div>
             <DatePicker setDateSelected={setDateSelected}/>
             <div>
-                <p>{dayOverview[0].patient}</p>
+                {/*<p>{dayOverview[0][0]}</p>*/}
+                {/*<p value={"{dayOverview[0][0]}"}></p>*/}
+                {/*<p>{dayOverview[0][3]}</p>*/}
+                {/*<p>{dayOverview[0][2]}</p>*/}
+                {/*<p>{dayOverview[2][2]}</p>*/}
+                {/*<p>{dayOverview[5][10]}</p>*/}
                 {/*<table>*/}
                 {/*    <tr>*/}
                 {/*        <td>9:00</td>*/}
