@@ -15,7 +15,6 @@ const PatientBookingPage = () => {
     const [dateSelected, setDateSelected] = useState('')
     const [appointmentSelected, setAppointmentSelected] = useState({string: '', timeSlot: 0})
     const [reasonForVisit, setReasonForVisit] = useState('')
-    const [appointmentBooked, setAppointmentBooked] = useState(false)
 
     useEffect(() => {
         setAppointmentSelected({string: '', timeSlot: 0})
@@ -43,8 +42,7 @@ const PatientBookingPage = () => {
                     doctorSelected={doctorSelected}
                     dateSelected={dateSelected}
                     appointmentSelected={appointmentSelected}
-                    reasonForVisit={reasonForVisit}
-                    setAppointmentBooked={setAppointmentBooked} />
+                    reasonForVisit={reasonForVisit} />
             </Form>
         </main>
     )
