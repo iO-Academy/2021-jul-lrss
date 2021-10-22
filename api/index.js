@@ -121,7 +121,7 @@ app.post('/login', async (req, res) => {
 app.get('/logout', async (request, response) => {
     request.session.destroy()
     userSession.isLoggedIn = false
-    response.status(401).send('You are not logged in.')
+    response.status(200).send('You are not logged in.')
 })
 
 app.get('/get-doctors', async (request, response) => {

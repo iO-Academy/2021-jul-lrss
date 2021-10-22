@@ -6,6 +6,7 @@ import ConfirmAppointmentModal from "../ConfirmAppointmentModal/ConfirmAppointme
 import AppointmentInfoModal from "./AppointmentInfoModal";
 import {Button} from "react-bootstrap";
 import TableRow from "./TableRow";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 const DoctorDayPlannerPage = () => {
     const [dateSelected, setDateSelected] = useState(new Date())
@@ -200,6 +201,7 @@ const DoctorDayPlannerPage = () => {
                         />
                     </tr>
             </table>
+            <LogoutButton />
         </div>
     )
 }

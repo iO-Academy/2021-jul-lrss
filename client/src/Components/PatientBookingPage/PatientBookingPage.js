@@ -7,6 +7,7 @@ import AppointmentSelector from "../AppointmentSelector/AppointmentSelector";
 import DoctorSelector from "../DoctorSelector/DoctorSelector";
 import ConfirmAppointmentModal from "../ConfirmAppointmentModal/ConfirmAppointmentModal";
 import ReasonForVisitTextArea from "../ReasonForVisitTextArea/ReasonForVisitTextArea";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 
 
