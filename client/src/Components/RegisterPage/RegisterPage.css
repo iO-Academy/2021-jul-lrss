@@ -22,3 +22,17 @@ span {
     display: inline-block;
     padding-top: 10px;
 }
+
+.registerForm {
+    width: 370px;
+}
+
+.buttonContainerRegisterPage {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.buttonContainerRegisterPage > button {
+    width: 45%;
+}

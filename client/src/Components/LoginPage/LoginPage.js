@@ -55,7 +55,7 @@ const LoginPage = (props) => {
 
     return (
         <div className="loginContainer">
-            <Form onSubmit={handleSubmit}>
+            <Form className="loginForm" onSubmit={handleSubmit}>
                 <Form.Group>
                     <label className="form-label">I would like to log in as a:</label>
                     <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
