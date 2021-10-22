@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# Version 4541
+# Version 5446
 #
-# http://www.sequelpro.com/
+# https://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
 # Host: 127.0.0.1 (MySQL 5.7.34)
 # Database: lrss
-# Generation Time: 2021-10-21 08:05:56 +0000
+# Generation Time: 2021-10-21 22:18:22 +0000
 # ************************************************************
 
 
@@ -15,6 +15,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
+SET NAMES utf8mb4;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
@@ -62,7 +63,7 @@ CREATE TABLE `doctors` (
   `name` varchar(120) NOT NULL DEFAULT '',
   `email` varchar(120) NOT NULL DEFAULT '',
   `mobile` varchar(120) NOT NULL DEFAULT '',
-  `password` varchar(255) NOT NULL DEFAULT '',
+  `hash` varchar(255) NOT NULL DEFAULT '',
   `gender` varchar(30) NOT NULL DEFAULT '',
   `specialism` varchar(120) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
@@ -71,12 +72,14 @@ CREATE TABLE `doctors` (
 LOCK TABLES `doctors` WRITE;
 /*!40000 ALTER TABLE `doctors` DISABLE KEYS */;
 
-INSERT INTO `doctors` (`id`, `name`, `email`, `mobile`, `password`, `gender`, `specialism`)
+INSERT INTO `doctors` (`id`, `name`, `email`, `mobile`, `hash`, `gender`, `specialism`)
 VALUES
-	(1,'Dr Test M\'Balls','test@test.test','numbers','1234','Male','GP'),
-	(2,'Dr Nah M\'Gwan','test@doctor.test','numbers','1234','Female','GP'),
-	(3,'Dr Evil','evil@evilcorp.com','666','666','Male','Evil Genius'),
-	(4,'Dr Stevil','stevil@stevilcorp.com','666','666','Trans','Stevil Genius');
+	(2,'Natalie Sharma','Doctor1@email.com','07465499042','$2a$12$kL1O8DBjgkp9PvS8BOmgE.9M4sHBR.iK.3Px2Nt8aR7jHjD1QWIiq','female','General Practice'),
+	(3,'Stuart McCann','Doctor2@email.com','07537123487','$2a$12$/6O5Fq9V9FriI8c811uC9.lurv/SpSlr0M5BHA66VcSQETBTOoWV6','male','Emergency Medicine'),
+	(4,'Luke Landau','Doctor3@email.com','07654388291','$2a$12$JfCmn2V5/umcxF/sNKmi1uorGoFbrI69rO1PdSvYrSak8HnkNM//2','male','Brain Surgery'),
+	(5,'Rosa Droogers','Doctor4@email.com','07563277190','$2a$12$62qxDylaQ7jon5vomUdJ6eevfzZ1RDQZA4O52q79esjkcAuooJpEW','female','Anaesthetist'),
+	(6,'Sam Bell','Doctor5@email.com','07465499020','$2a$12$H4cHiPiaTxHGj5KeYOkQ4OSnLHKVXdSxhlchr2f4NdcqHMl5TyHGi','male','Dermatology'),
+	(7,'Dr Evil','Doctor6@email.com','07774396064','$2a$12$eDWC3OEqwx36LDl1M.wF8.z7oS9LFVp9r75Vwbx.RPRd6zw8/Uwi2','male','Psychiatry');
 
 /*!40000 ALTER TABLE `doctors` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -92,19 +95,20 @@ CREATE TABLE `patients` (
   `name` varchar(120) NOT NULL DEFAULT '',
   `email` varchar(120) NOT NULL DEFAULT '',
   `mobile` varchar(120) NOT NULL DEFAULT '',
-  `password` varchar(255) NOT NULL DEFAULT '',
+  `hash` varchar(255) NOT NULL DEFAULT '',
   `gender` varchar(30) NOT NULL DEFAULT '',
   `dob` varchar(30) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `onePatient` (`name`,`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 LOCK TABLES `patients` WRITE;
 /*!40000 ALTER TABLE `patients` DISABLE KEYS */;
 
-INSERT INTO `patients` (`id`, `name`, `email`, `mobile`, `password`, `gender`, `dob`)
+INSERT INTO `patients` (`id`, `name`, `email`, `mobile`, `hash`, `gender`, `dob`)
 VALUES
-	(1,'Phil McKraken Johnson','phil@phil.phil','numbers','1234','Female','23/10/1990'),
-	(2,'Something','sdad','dsadsf','safsd','fdfs','dfsf');
+	(1,'Sally Taunton','sally@email.com','07465499020','$2a$12$iKFoYV0fRBb.numn7ODqBucG8QbAarM5v08.hsYhgf7S7aXhvj7cm','female','1980-09-30'),
+	(5,'Jason Smith','jason@email.com','07465499010','$2a$12$TOnVi0Er0Q9WDzioKmhoROXI1FnpKj..bAhijzSriOvHMV.qtkBuy','male','1989-09-29');
 
 /*!40000 ALTER TABLE `patients` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import ConfirmCancelModal from "../ConfirmCancelModal/ConfirmCancelModal";
 
 const PatientProfileCard = (props) => {
 
@@ -40,10 +41,8 @@ const PatientProfileCard = (props) => {
         fetch(appointmentsUrl, appointmentRequestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 if (data.length > 0){
                     setAppointmentData(data[0])
-                    props.setAppointmentBooked(true)
                 }
             })
             .catch()
@@ -60,13 +59,13 @@ const PatientProfileCard = (props) => {
             case 4:
                 return '12:00 noon'
             case 5:
-                return '13:00 pm'
+                return '13:00'
             case 6:
-                return '14:00 pm'
+                return '14:00'
             case 7:
-                return '15:00 pm'
+                return '15:00'
             case 8:
-                return '16:00 pm'
+                return '16:00'
             default:
                 return 'none'
         }
@@ -76,12 +75,8 @@ const PatientProfileCard = (props) => {
         evt.preventDefault()
     }
 
-    const cancelAppointment = evt => {
-        evt.preventDefault()
-    }
-
     return (
-        <div className={"container mt-4 mb-4 p-3 d-flex justify-content-center" + props.profileDisplay}>
+        <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
             <div className="card p-4">
                 <div className=" image d-flex flex-column justify-content-center align-items-center">
                     <button className="btn btn-secondary" onClick={editProfile}>
@@ -91,10 +86,15 @@ const PatientProfileCard = (props) => {
                     <div className="d-flex flex-row justify-content-center align-items-center gap-2">
                         <span className="text-muted">{appointmentData.id === 0 ? 'No Appointment Booked' : 'Appointment Booked'}</span>
                     </div>
-                    <div className={"d-flex flex-column mt-3" + (props.appointmentBooked ? '' : ' d-none')}>
+                    <div className={"d-flex flex-column mt-3 text-center" + (appointmentData.id !== 0 ? '' : ' d-none')}>
                         <h5 className="m-0">You have an appointment with {appointmentData.doctor ?? ''}</h5>
                         <h5>at {displayTimeSlot(appointmentData.time_slot)} on {appointmentData.date ?? ''}</h5>
-                        <button className="btn btn-danger" onClick={cancelAppointment}>Cancel</button>
+                        <ConfirmCancelModal
+                            appointmentData={appointmentData}
+                            setAppointmentData={setAppointmentData}/>
+                    </div>
+                    <div className={"mt-3" + (appointmentData.id !== 0 ? ' d-none' : '')}>
+                        <a className="btn btn-primary" href="/book-appointment">Book Appointment</a>
                     </div>
                 </div>
             </div>

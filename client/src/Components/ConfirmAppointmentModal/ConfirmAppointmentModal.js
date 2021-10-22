@@ -1,10 +1,21 @@
 import React, {useEffect, useState} from "react";
 import {Button, Modal, ModalTitle} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
+import { useHistory } from "react-router-dom";
 
 const ConfirmAppointmentModal = (props) => {
 
+    let history = useHistory();
     const [confirmDisabled, setConfirmDisabled] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
+
+    const showModal = () => {
+        setIsOpen(true)
+    }
+    const hideModal = () => {
+        setIsOpen(false)
+    }
+
     useEffect(() => {
         if (props.doctorSelected.id === 0 || props.dateSelected === '' || props.appointmentSelected.timeSlot === 0 || props.reasonForVisit === ''){
             setConfirmDisabled(true)
@@ -13,13 +24,6 @@ const ConfirmAppointmentModal = (props) => {
         }
     }, [props.doctorSelected, props.dateSelected, props.appointmentSelected, props.reasonForVisit])
 
-    const [isOpen, setIsOpen] = useState(false)
-    const showModal = () => {
-        setIsOpen(true)
-    }
-    const hideModal = () => {
-        setIsOpen(false)
-    }
 
     const handleSubmit = () => {
         const appointmentData = {
@@ -37,9 +41,7 @@ const ConfirmAppointmentModal = (props) => {
         fetch(url, requestOptions)
             .then(response => {
                 if (response.status === 200){
-                    props.setAppointmentBooked(true)
-                    props.toggleDisplay()
-                    hideModal()
+                    history.push("/profile")
                 } else {
                     console.log('error')
                 }

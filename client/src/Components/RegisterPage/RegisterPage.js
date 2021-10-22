@@ -19,6 +19,7 @@ const RegisterPage = (props) => {
     const [emailError, setEmailError] = useState('')
     const [dobError, setDobError] = useState('')
     const [genderError, setGenderError] = useState('')
+    const [serverError, setServerError] = useState(' ')
 
     const handleNameChange = event => {
         setName(event.target.value)
@@ -80,7 +81,6 @@ const RegisterPage = (props) => {
     }
 
     const submit = () => {
-            console.log('hoi')
             const url = 'http://localhost:3001/register'
             const requestOptions = {
                 method: 'POST',
@@ -94,11 +94,12 @@ const RegisterPage = (props) => {
                     password: password
                 })
             }
-            console.log(requestOptions)
             fetch(url, requestOptions)
                 .then(response => {
                     if (response.status === 200) {
-                        props.history.push('/PatientBookingPage')
+                        props.history.push('/profile')
+                    } else if (response.status === 403) {
+                        setServerError('Account already exists')
                     }
                 })
                 .catch(error => {
@@ -109,13 +110,13 @@ const RegisterPage = (props) => {
     return (
         <div className="registerContainer">
             <Form onSubmit={validate}>
-                <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Group controlId="formBasicName">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter first and last name" onChange={handleNameChange}
                                   value={name}/>
                     <span className="text-danger">{nameError}</span>
                 </Form.Group>
-                <Form.Group className="mb-3 genderInput" controlId="formBasicGender">
+                <Form.Group className="mb-4 genderInput" controlId="formBasicGender">
                     <label className="col-sm-4">Gender</label>
                     <label className="col-sm-4 checkbox-inline custom-label">
                         <input id="genMale" type="checkbox" value="male" checked={checkedMale} onChange={updateGender}/>Male
@@ -127,25 +128,25 @@ const RegisterPage = (props) => {
                     <span className="text-danger">{genderError}</span>
                 </Form.Group>
                 <Form.Group controlId="dob">
-                    <Form.Label className="custom-label">Select date of birth</Form.Label>
+                    <Form.Label className="">Select date of birth</Form.Label>
                     <Form.Control type="date" name="dob" selected={dob} value={dob} onChange={handleDobChange}/>
                     <span className="text-danger">{dobError}</span>
                 </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label className="custom-label">Email address</Form.Label>
+                <Form.Group>
+                    <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange} value={email}/>
                     <span className="text-danger">{emailError}</span>
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
                 </Form.Group>
-                <Form.Group className="mb-3">
+                <Form.Group>
                     <Form.Label>Phone number</Form.Label>
                     <Form.Control type="text" placeholder="Enter phone number" onChange={handlePhoneNumberChange}
                                   value={phoneNumber}/>
                     <span className="text-danger">{phoneNumberError}</span>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}
                                   value={password}/>
@@ -153,6 +154,7 @@ const RegisterPage = (props) => {
                     <Form.Control type="password" placeholder="Confirm password" onChange={handlePasswordCheckChange}
                                   value={passwordCheck}/>
                     <span className="text-danger">{passwordError}</span>
+                    <span className={"text-danger"}>{serverError}</span>
                 </Form.Group>
                 <Button variant="primary" className="btn btn-primary" type="submit">Submit</Button>
             </Form>

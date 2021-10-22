@@ -40,7 +40,7 @@ const LoginPage = (props) => {
             .then(response => {
                 if(response.status === 200 && !isDoctor) {
                     setError(false)
-                    props.history.push('/appointments')
+                    props.history.push('/profile')
                 } else if (response.status === 200 && isDoctor) {
                     setError(false)
                     props.history.push('/day-planner')
@@ -67,9 +67,6 @@ const LoginPage = (props) => {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange} value={email} />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -77,8 +74,8 @@ const LoginPage = (props) => {
                     <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange} value={password} />
                 </Form.Group>
                 <Form.Group className="mb-3 buttonContainer" controlId="formBasicEmail">
-                    <Button variant="primary" className="btn btn-primary" type="submit">Submit</Button>
-                    <Button onClick={goToRegisterPage}>Register as a new patient</Button>
+                    <Button variant="primary" type="submit">Submit</Button>
+                    <Button onClick={goToRegisterPage} className="btn-secondary">Register as a new patient</Button>
                 </Form.Group>
                 <p className={ !error ? "hidden " : ""}>Sorry, those log in details were incorrect.</p>
             </Form>
