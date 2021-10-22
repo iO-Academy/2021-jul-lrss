@@ -53,20 +53,23 @@ const AppointmentInfoModal = (props) => {
     //             }
     //         }).catch()
     // }
-
+    console.log(props.name)
     return (
         <>
             {/*<Modal show={isOpen} onHide={hideModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered={true}>*/}
-            <Button className="mt-2 btn-danger" onClick={showModal}>Cancel Booking</Button>
+            <Button className={!props.name ? ' d-none' : ''} onClick={showModal}>more info</Button>
             <Modal show={isOpen} onHide={hideModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered={true}>
                 <ModalHeader>
-                    <ModalTitle>Cancel Appointment</ModalTitle>
+                    <ModalTitle>Patient name: {props.name}</ModalTitle>
                 </ModalHeader>
                 <Modal.Body>
-                    <p>Are you sure you want to cancel your appointment?</p>
+                    <p>Appointment Time: {props.timeSlot}</p>
+                    <p>Patient Date of Birth: {props.dob} </p>
+                    <p>Patient Gender: {props.gender} </p>
+                    <p>Reason for Visit: {props.reasonForVisit} </p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <p>footer</p>
+                    <Button className="btn-secondary" onClick={hideModal}>Back</Button>
                 </Modal.Footer>
             </Modal>
         </>
