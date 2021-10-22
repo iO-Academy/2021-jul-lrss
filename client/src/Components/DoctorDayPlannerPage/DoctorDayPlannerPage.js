@@ -79,7 +79,6 @@ const DoctorDayPlannerPage = () => {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                doctorID: 3,
                 date: (dateSelected === '' ? new Date().toLocaleDateString() : dateSelected.toLocaleDateString())
             })
         }
@@ -124,7 +123,7 @@ const DoctorDayPlannerPage = () => {
                         />
                     </tr>
                     <tr>
-                        <td>09:00</td>
+                        <td>10:00</td>
                         <td>{dayOverview[2].patient ? dayOverview[2].patient : ''}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[2].time_slot)}
@@ -135,7 +134,7 @@ const DoctorDayPlannerPage = () => {
                         />
                     </tr>
                     <tr>
-                        <td>09:00</td>
+                        <td>11:00</td>
                         <td>{dayOverview[3].patient ? dayOverview[3].patient : ''}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[3].time_slot)}
@@ -146,7 +145,7 @@ const DoctorDayPlannerPage = () => {
                         />
                     </tr>
                     <tr>
-                        <td>09:00</td>
+                        <td>12:00</td>
                         <td>{dayOverview[4].patient ? dayOverview[4].patient : ''}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[4].time_slot)}
@@ -157,7 +156,7 @@ const DoctorDayPlannerPage = () => {
                         />
                     </tr>
                     <tr>
-                        <td>09:00</td>
+                        <td>13:00</td>
                         <td>{dayOverview[5].patient ? dayOverview[5].patient : ''}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[5].time_slot)}
@@ -168,7 +167,7 @@ const DoctorDayPlannerPage = () => {
                         />
                     </tr>
                     <tr>
-                        <td>09:00</td>
+                        <td>14:00</td>
                         <td>{dayOverview[6].patient ? dayOverview[6].patient : ''}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[6].time_slot)}
@@ -179,7 +178,7 @@ const DoctorDayPlannerPage = () => {
                         />
                     </tr>
                     <tr>
-                        <td>09:00</td>
+                        <td>15:00</td>
                         <td>{dayOverview[7].patient ? dayOverview[7].patient : ''}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[7].time_slot)}
@@ -190,7 +189,7 @@ const DoctorDayPlannerPage = () => {
                         />
                     </tr>
                     <tr>
-                        <td>09:00</td>
+                        <td>16:00</td>
                         <td>{dayOverview[8].patient ? dayOverview[8].patient : ''}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[8].time_slot)}
@@ -201,15 +200,6 @@ const DoctorDayPlannerPage = () => {
                         />
                     </tr>
             </table>
-
-            {/*{*/}
-            {/*    dayOverview[0].forEach(appointment => {*/}
-            {/*        <table>*/}
-            {/*            <TableRow appointment={appointment} displayTimeSlot={displayTimeSlot}*/}
-            {/*                      moduleDisplay={moduleDisplay}/>*/}
-            {/*        </table>*/}
-            {/*    })*/}
-            {/*}*/}
         </div>
     )
 }
