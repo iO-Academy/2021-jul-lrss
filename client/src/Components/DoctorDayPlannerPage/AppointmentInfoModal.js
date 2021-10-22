@@ -57,7 +57,7 @@ const AppointmentInfoModal = (props) => {
     return (
         <>
             {/*<Modal show={isOpen} onHide={hideModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered={true}>*/}
-            <Button className={!props.name ? ' d-none' : ''} onClick={showModal}>more info</Button>
+            <Button className={"btn btn-sm"+ (!props.name ? ' d-none' : '')} onClick={showModal}>{props.name}</Button>
             <Modal show={isOpen} onHide={hideModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered={true}>
                 <ModalHeader>
                     <ModalTitle>Patient name: {props.name}</ModalTitle>
