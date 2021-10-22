@@ -9,8 +9,6 @@ import ConfirmAppointmentModal from "../ConfirmAppointmentModal/ConfirmAppointme
 import ReasonForVisitTextArea from "../ReasonForVisitTextArea/ReasonForVisitTextArea";
 import LogoutButton from "../LogoutButton/LogoutButton";
 
-
-
 const PatientBookingPage = () => {
     const [doctorSelected, setDoctorSelected] = useState({name: '', id: 0})
     const [dateSelected, setDateSelected] = useState('')

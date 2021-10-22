@@ -143,7 +143,13 @@ app.post('/get-doctor-appointments-for-day', async (request, response) => {
     response.json(data)
 })
 
-app.post('/book-appointment', async (request, response) => {
+const appointValidate = [
+    body('doctor').isString().trim().escape(),
+    body('dateString', 'Please enter a valid date format - dd/mm/yyy').isString().trim(),
+    body('timeSlot', 'Please pick a valid slot between 1 and 8').trim().escape().matches('[1-8]'),
+    body('reasonForVisit').trim().escape().isString()]
+
+app.post('/book-appointment', ...appointValidate,async (request, response) => {
     const connection = await getConnection()
     const userID = userSession.userObject.id
     const sqlQuery =
