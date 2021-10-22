@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.34)
 # Database: lrss
-# Generation Time: 2021-10-21 14:58:56 +0000
+# Generation Time: 2021-10-21 22:18:22 +0000
 # ************************************************************
 
 
@@ -78,7 +78,8 @@ VALUES
 	(3,'Stuart McCann','Doctor2@email.com','07537123487','$2a$12$/6O5Fq9V9FriI8c811uC9.lurv/SpSlr0M5BHA66VcSQETBTOoWV6','male','Emergency Medicine'),
 	(4,'Luke Landau','Doctor3@email.com','07654388291','$2a$12$JfCmn2V5/umcxF/sNKmi1uorGoFbrI69rO1PdSvYrSak8HnkNM//2','male','Brain Surgery'),
 	(5,'Rosa Droogers','Doctor4@email.com','07563277190','$2a$12$62qxDylaQ7jon5vomUdJ6eevfzZ1RDQZA4O52q79esjkcAuooJpEW','female','Anaesthetist'),
-	(6,'Sam Bell','Doctor5@email.com','07465499020','$2a$12$H4cHiPiaTxHGj5KeYOkQ4OSnLHKVXdSxhlchr2f4NdcqHMl5TyHGi','male','Dermatology');
+	(6,'Sam Bell','Doctor5@email.com','07465499020','$2a$12$H4cHiPiaTxHGj5KeYOkQ4OSnLHKVXdSxhlchr2f4NdcqHMl5TyHGi','male','Dermatology'),
+	(7,'Dr Evil','Doctor6@email.com','07774396064','$2a$12$eDWC3OEqwx36LDl1M.wF8.z7oS9LFVp9r75Vwbx.RPRd6zw8/Uwi2','male','Psychiatry');
 
 /*!40000 ALTER TABLE `doctors` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -97,7 +98,8 @@ CREATE TABLE `patients` (
   `hash` varchar(255) NOT NULL DEFAULT '',
   `gender` varchar(30) NOT NULL DEFAULT '',
   `dob` varchar(30) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `onePatient` (`name`,`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 LOCK TABLES `patients` WRITE;

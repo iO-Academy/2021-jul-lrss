@@ -3,7 +3,9 @@ import PatientProfileCard from "../PatientProfileCard/PatientProfileCard";
 
 const PatientProfilePage = () => {
     return (
-        <PatientProfileCard />
+        <div>
+            <PatientProfileCard />
+        </div>
     )
 }
 

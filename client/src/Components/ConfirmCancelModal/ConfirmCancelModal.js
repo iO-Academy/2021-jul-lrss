@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Button, Modal, ModalTitle} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 
@@ -22,7 +22,6 @@ const ConfirmCancelModal = (props) => {
                 date: props.appointmentData.date ?? ''
             })
         }
-        // console.log(cancelOptions)
         fetch(url, cancelOptions)
             .then(response => {
                 if (response.status === 200){

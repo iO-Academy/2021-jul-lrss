@@ -8,17 +8,19 @@
     height: 100vh;
 }
 
-form {
+.loginForm {
     background-color: #fff;
     padding: 30px;
     padding-bottom: 0;
     border-radius: 10px;
     margin-bottom: 0;
+    width: 370px;
+    height: 470px;
 }
 
 .buttonContainer {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     justify-content: space-between;
 }
 
@@ -35,4 +37,5 @@ form {
 
 button {
     margin-top: 0.55rem;
+    margin-bottom: 0.5rem;
 }

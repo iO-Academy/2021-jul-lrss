@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import ConfirmCancelModal from "../ConfirmCancelModal/ConfirmCancelModal";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 const PatientProfileCard = (props) => {
 
@@ -59,13 +60,13 @@ const PatientProfileCard = (props) => {
             case 4:
                 return '12:00 noon'
             case 5:
-                return '13:00 pm'
+                return '13:00'
             case 6:
-                return '14:00 pm'
+                return '14:00'
             case 7:
-                return '15:00 pm'
+                return '15:00'
             case 8:
-                return '16:00 pm'
+                return '16:00'
             default:
                 return 'none'
         }
@@ -96,8 +97,10 @@ const PatientProfileCard = (props) => {
                     <div className={"mt-3" + (appointmentData.id !== 0 ? ' d-none' : '')}>
                         <a className="btn btn-primary" href="/book-appointment">Book Appointment</a>
                     </div>
+                    <LogoutButton />
                 </div>
             </div>
+
         </div>
     )
 }
