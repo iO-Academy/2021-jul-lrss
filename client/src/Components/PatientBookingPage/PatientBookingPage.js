@@ -20,7 +20,7 @@ const PatientBookingPage = () => {
     }, [doctorSelected, dateSelected])
 
     return (
-        <main className="d-flex justify-content-center align-items-center text-center vh-100">
+        <main className="d-flex justify-content-center align-items-center text-center vh-100 bookingPageContainer">
             <Form className="col-8">
                 <div className="d-flex flex-row flex-nowrap justify-content-between mb-3">
                     <h1 className="">LRSS Health</h1>

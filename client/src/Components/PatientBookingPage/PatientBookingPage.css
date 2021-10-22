@@ -11,3 +11,11 @@ body {
 .month-container {
     margin: 20px;
 }
+
+.bookingPageContainer {
+    background-image: url('./login-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+}

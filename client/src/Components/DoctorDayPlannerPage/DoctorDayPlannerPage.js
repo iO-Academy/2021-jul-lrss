@@ -107,7 +107,7 @@ const DoctorDayPlannerPage = () => {
     }, [dateSelected])
 
     return (
-        <div className="d-flex flex-column flex-nowrap mx-3 bg-light vh-75 align-middle">
+        <div className="d-flex flex-column flex-nowrap mx-3 bg-light vh-75 align-middle doctorDayPlannerPage">
             <h1 className="text-center mb-3">LRSS Health</h1>
             <div className="d-flex flex-row flex-wrap mx-3 justify-content-center">
                 <DatePicker setDateSelected={setDateSelected}/>

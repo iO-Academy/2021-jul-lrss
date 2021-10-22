@@ -1,5 +1,6 @@
 import {Button} from 'react-bootstrap'
 import {useHistory} from "react-router-dom";
+import './LogoutButton.css';
 
 const LogoutButton = () => {
     const history = useHistory()
@@ -19,7 +20,7 @@ const LogoutButton = () => {
     }
 
     return (
-        <Button className="btn-danger" onClick={logOut}>Log out</Button>
+        <Button className="btn-danger btn-sm logOut" onClick={logOut}>Log out</Button>
     )
 }
 
