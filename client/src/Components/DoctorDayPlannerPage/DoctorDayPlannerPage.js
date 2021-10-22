@@ -4,7 +4,7 @@ import DatePicker from "../DatePicker/DatePicker";
 import './DoctorDayPlannerPage.css'
 import ConfirmAppointmentModal from "../ConfirmAppointmentModal/ConfirmAppointmentModal";
 import AppointmentInfoModal from "./AppointmentInfoModal";
-import {Button} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 import TableRow from "./TableRow";
 
 const DoctorDayPlannerPage = () => {
@@ -106,14 +106,15 @@ const DoctorDayPlannerPage = () => {
     }, [dateSelected])
 
     return (
-        <div>
-            <div>
+        <div className="d-flex flex-column flex-nowrap mx-3 bg-light">
+            <h1 className="text-center mb-3">LRSS Health</h1>
+            <div className="d-flex flex-row flex-wrap mx-3 justify-content-center">
                 <DatePicker setDateSelected={setDateSelected}/>
-            </div>
-            <table>
-                    <tr>
+                <table className="mx-5">
+                    <tr className="card-title"><h3 className="text-center">Day Planner</h3></tr>
+                    <tr className="d-flex flex-row align-items-baseline justify-content-between mb-1">
                         <td>09:00</td>
-                        <td>{dayOverview[1].patient ? dayOverview[1].patient : ''}</td>
+                        <td>{dayOverview[1].patient ? '' : '-------------'}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                             timeSlot={displayTimeSlot(dayOverview[1].time_slot)}
                             name={dayOverview[1].patient ? dayOverview[1].patient : ''}
@@ -122,9 +123,9 @@ const DoctorDayPlannerPage = () => {
                             gender={dayOverview[1].patient_gender ? dayOverview[1].patient_gender : ''}
                         />
                     </tr>
-                    <tr>
+                    <tr className="d-flex flex-row align-items-baseline justify-content-between mb-1">
                         <td>10:00</td>
-                        <td>{dayOverview[2].patient ? dayOverview[2].patient : ''}</td>
+                        <td>{dayOverview[2].patient ? '' : '-------------'}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[2].time_slot)}
                                               name={dayOverview[2].patient ? dayOverview[2].patient : ''}
@@ -133,9 +134,9 @@ const DoctorDayPlannerPage = () => {
                                               gender={dayOverview[2].patient_gender ? dayOverview[2].patient_gender : ''}
                         />
                     </tr>
-                    <tr>
+                    <tr className="d-flex flex-row align-items-baseline justify-content-between mb-1">
                         <td>11:00</td>
-                        <td>{dayOverview[3].patient ? dayOverview[3].patient : ''}</td>
+                        <td>{dayOverview[3].patient ? '' : '-------------'}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[3].time_slot)}
                                               name={dayOverview[3].patient ? dayOverview[3].patient : ''}
@@ -144,9 +145,9 @@ const DoctorDayPlannerPage = () => {
                                               gender={dayOverview[3].patient_gender ? dayOverview[3].patient_gender : ''}
                         />
                     </tr>
-                    <tr>
+                    <tr className="d-flex flex-row align-items-baseline justify-content-between mb-1">
                         <td>12:00</td>
-                        <td>{dayOverview[4].patient ? dayOverview[4].patient : ''}</td>
+                        <td>{dayOverview[4].patient ? '' : '-------------'}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[4].time_slot)}
                                               name={dayOverview[4].patient ? dayOverview[4].patient : ''}
@@ -155,9 +156,9 @@ const DoctorDayPlannerPage = () => {
                                               gender={dayOverview[4].patient_gender ? dayOverview[4].patient_gender : ''}
                         />
                     </tr>
-                    <tr>
+                    <tr className="d-flex flex-row align-items-baseline justify-content-between mb-1">
                         <td>13:00</td>
-                        <td>{dayOverview[5].patient ? dayOverview[5].patient : ''}</td>
+                        <td>{dayOverview[5].patient ? '' : '-------------'}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[5].time_slot)}
                                               name={dayOverview[5].patient ? dayOverview[5].patient : ''}
@@ -166,9 +167,9 @@ const DoctorDayPlannerPage = () => {
                                               gender={dayOverview[5].patient_gender ? dayOverview[5].patient_gender : ''}
                         />
                     </tr>
-                    <tr>
+                    <tr className="d-flex flex-row align-items-baseline justify-content-between mb-1">
                         <td>14:00</td>
-                        <td>{dayOverview[6].patient ? dayOverview[6].patient : ''}</td>
+                        <td>{dayOverview[6].patient ? '' : '-------------'}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[6].time_slot)}
                                               name={dayOverview[6].patient ? dayOverview[6].patient : ''}
@@ -177,9 +178,9 @@ const DoctorDayPlannerPage = () => {
                                               gender={dayOverview[6].patient_gender ? dayOverview[6].patient_gender : ''}
                         />
                     </tr>
-                    <tr>
+                    <tr className="d-flex flex-row align-items-baseline justify-content-between mb-1">
                         <td>15:00</td>
-                        <td>{dayOverview[7].patient ? dayOverview[7].patient : ''}</td>
+                        <td>{dayOverview[7].patient ? '' : '-------------'}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[7].time_slot)}
                                               name={dayOverview[7].patient ? dayOverview[7].patient : ''}
@@ -188,9 +189,9 @@ const DoctorDayPlannerPage = () => {
                                               gender={dayOverview[7].patient_gender ? dayOverview[7].patient_gender : ''}
                         />
                     </tr>
-                    <tr>
+                    <tr className="d-flex flex-row align-items-baseline justify-content-between mb-1">
                         <td>16:00</td>
-                        <td>{dayOverview[8].patient ? dayOverview[8].patient : ''}</td>
+                        <td>{dayOverview[8].patient ? '' : '-------------'}</td>
                         <AppointmentInfoModal className={!moduleDisplay ? 'd-none' : ''}
                                               timeSlot={displayTimeSlot(dayOverview[8].time_slot)}
                                               name={dayOverview[8].patient ? dayOverview[8].patient : ''}
@@ -199,7 +200,8 @@ const DoctorDayPlannerPage = () => {
                                               gender={dayOverview[8].patient_gender ? dayOverview[8].patient_gender : ''}
                         />
                     </tr>
-            </table>
+                </table>
+            </div>
         </div>
     )
 }
