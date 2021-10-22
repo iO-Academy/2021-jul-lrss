@@ -6,8 +6,8 @@
 # https://github.com/sequelpro/sequelpro
 #
 # Host: 127.0.0.1 (MySQL 5.7.34)
-# Database: lrss_2021-10-18
-# Generation Time: 2021-10-20 15:06:25 +0000
+# Database: lrss
+# Generation Time: 2021-10-21 22:18:22 +0000
 # ************************************************************
 
 
@@ -45,8 +45,9 @@ CREATE TABLE `appointments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `patient_id` int(10) unsigned NOT NULL,
   `doctor_id` int(10) unsigned NOT NULL,
-  `date` date NOT NULL,
+  `date` varchar(30) NOT NULL DEFAULT '',
   `time_slot` int(3) unsigned NOT NULL,
+  `reason_for_visit` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -77,7 +78,8 @@ VALUES
 	(3,'Stuart McCann','Doctor2@email.com','07537123487','$2a$12$/6O5Fq9V9FriI8c811uC9.lurv/SpSlr0M5BHA66VcSQETBTOoWV6','male','Emergency Medicine'),
 	(4,'Luke Landau','Doctor3@email.com','07654388291','$2a$12$JfCmn2V5/umcxF/sNKmi1uorGoFbrI69rO1PdSvYrSak8HnkNM//2','male','Brain Surgery'),
 	(5,'Rosa Droogers','Doctor4@email.com','07563277190','$2a$12$62qxDylaQ7jon5vomUdJ6eevfzZ1RDQZA4O52q79esjkcAuooJpEW','female','Anaesthetist'),
-	(6,'Sam Bell','Doctor5@email.com','07465499020','$2a$12$H4cHiPiaTxHGj5KeYOkQ4OSnLHKVXdSxhlchr2f4NdcqHMl5TyHGi','male','Dermatology');
+	(6,'Sam Bell','Doctor5@email.com','07465499020','$2a$12$H4cHiPiaTxHGj5KeYOkQ4OSnLHKVXdSxhlchr2f4NdcqHMl5TyHGi','male','Dermatology'),
+	(7,'Dr Evil','Doctor6@email.com','07774396064','$2a$12$eDWC3OEqwx36LDl1M.wF8.z7oS9LFVp9r75Vwbx.RPRd6zw8/Uwi2','male','Psychiatry');
 
 /*!40000 ALTER TABLE `doctors` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -96,9 +98,20 @@ CREATE TABLE `patients` (
   `hash` varchar(255) NOT NULL DEFAULT '',
   `gender` varchar(30) NOT NULL DEFAULT '',
   `dob` varchar(30) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `onePatient` (`name`,`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+LOCK TABLES `patients` WRITE;
+/*!40000 ALTER TABLE `patients` DISABLE KEYS */;
+
+INSERT INTO `patients` (`id`, `name`, `email`, `mobile`, `hash`, `gender`, `dob`)
+VALUES
+	(1,'Sally Taunton','sally@email.com','07465499020','$2a$12$iKFoYV0fRBb.numn7ODqBucG8QbAarM5v08.hsYhgf7S7aXhvj7cm','female','1980-09-30'),
+	(5,'Jason Smith','jason@email.com','07465499010','$2a$12$TOnVi0Er0Q9WDzioKmhoROXI1FnpKj..bAhijzSriOvHMV.qtkBuy','male','1989-09-29');
+
+/*!40000 ALTER TABLE `patients` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table prescriptions
