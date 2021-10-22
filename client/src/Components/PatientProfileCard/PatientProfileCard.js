@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from "react";
 import ConfirmCancelModal from "../ConfirmCancelModal/ConfirmCancelModal";
-<<<<<<< HEAD
 import './PatientProfileCard.css'
-=======
 import LogoutButton from "../LogoutButton/LogoutButton";
->>>>>>> c302d47e150ab39a08eb1ad840b049604fea5200
+
 
 const PatientProfileCard = (props) => {
 
@@ -99,7 +97,7 @@ const PatientProfileCard = (props) => {
                             setAppointmentData={setAppointmentData}/>
                     </div>
                     <div className={"mt-3" + (appointmentData.id !== 0 ? ' d-none' : '')}>
-                        <a className="btn btn-primary" href="/book-appointment">Book Appointment</a>
+                        <a className="btn btn-primary bookAppointmentBtn" href="/book-appointment">Book Appointment</a>
                     </div>
                     <LogoutButton />
                 </div>
