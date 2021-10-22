@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import ConfirmCancelModal from "../ConfirmCancelModal/ConfirmCancelModal";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 const PatientProfileCard = (props) => {
 
@@ -96,8 +97,10 @@ const PatientProfileCard = (props) => {
                     <div className={"mt-3" + (appointmentData.id !== 0 ? ' d-none' : '')}>
                         <a className="btn btn-primary" href="/book-appointment">Book Appointment</a>
                     </div>
+                    <LogoutButton />
                 </div>
             </div>
+
         </div>
     )
 }
