@@ -57,6 +57,10 @@ const RegisterPage = (props) => {
         }
     }
 
+    const goToLoginPage = () => {
+        props.history.push('/')
+    }
+
     const validate = (event) => {
         event.preventDefault()
         if (!name) {
@@ -109,7 +113,7 @@ const RegisterPage = (props) => {
 
     return (
         <div className="registerContainer">
-            <Form onSubmit={validate}>
+            <Form className="registerForm" onSubmit={validate}>
                 <Form.Group controlId="formBasicName">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter first and last name" onChange={handleNameChange}
@@ -141,14 +145,14 @@ const RegisterPage = (props) => {
                     </Form.Text>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Phone number</Form.Label>
+                    <Form.Label className={"mt-3"}>Phone number</Form.Label>
                     <Form.Control type="text" placeholder="Enter phone number" onChange={handlePhoneNumberChange}
                                   value={phoneNumber}/>
                     <span className="text-danger">{phoneNumberError}</span>
                 </Form.Group>
-                <Form.Group controlId="formBasicPassword">
+                <Form.Group>
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}
+                    <Form.Control className="mb-3" type="password" placeholder="Password" onChange={handlePasswordChange}
                                   value={password}/>
                     <Form.Label className="custom-label">Please confirm your password</Form.Label>
                     <Form.Control type="password" placeholder="Confirm password" onChange={handlePasswordCheckChange}
@@ -156,7 +160,10 @@ const RegisterPage = (props) => {
                     <span className="text-danger">{passwordError}</span>
                     <span className={"text-danger"}>{serverError}</span>
                 </Form.Group>
-                <Button variant="primary" className="btn btn-primary" type="submit">Submit</Button>
+                <div className={"buttonContainerRegisterPage"}>
+                    <Button variant="primary" className="btn btn-primary" type="submit">Submit</Button>
+                    <Button onClick={goToLoginPage} className="btn-secondary">Cancel</Button>
+                </div>
             </Form>
         </div>
     )
