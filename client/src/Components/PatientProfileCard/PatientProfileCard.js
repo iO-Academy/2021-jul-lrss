@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from "react";
 import ConfirmCancelModal from "../ConfirmCancelModal/ConfirmCancelModal";
+import './PatientProfileCard.css'
+import LogoutButton from "../LogoutButton/LogoutButton";
+
 
 const PatientProfileCard = (props) => {
 
@@ -76,7 +79,7 @@ const PatientProfileCard = (props) => {
     }
 
     return (
-        <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
+        <div className="container mt-0 mb-4 p-3 d-flex justify-content-center profileCard">
             <div className="card p-4">
                 <div className=" image d-flex flex-column justify-content-center align-items-center">
                     <button className="btn btn-secondary" onClick={editProfile}>
@@ -94,10 +97,12 @@ const PatientProfileCard = (props) => {
                             setAppointmentData={setAppointmentData}/>
                     </div>
                     <div className={"mt-3" + (appointmentData.id !== 0 ? ' d-none' : '')}>
-                        <a className="btn btn-primary" href="/book-appointment">Book Appointment</a>
+                        <a className="btn btn-primary bookAppointmentBtn" href="/book-appointment">Book Appointment</a>
                     </div>
+                    <LogoutButton />
                 </div>
             </div>
+
         </div>
     )
 }

@@ -55,13 +55,13 @@ const LoginPage = (props) => {
 
     return (
         <div className="loginContainer">
-            <Form onSubmit={handleSubmit}>
+            <Form className="loginForm" onSubmit={handleSubmit}>
                 <Form.Group>
-                    <label class="form-label">I would like to log in as a:</label>
+                    <label className="form-label">I would like to log in as a:</label>
                     <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
                             name="isDoctor" id="isDoctor" onChange={handleDoctorChange} value={isDoctor}>
-                        <option class="dropdown-item" value="true">doctor</option>
-                        <option selected class="dropdown-item" value="false">patient</option>
+                        <option className="dropdown-item" value="true">doctor</option>
+                        <option selected className="dropdown-item" value="false">patient</option>
                     </select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">

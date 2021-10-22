@@ -1,9 +1,13 @@
 import React from "react";
 import PatientProfileCard from "../PatientProfileCard/PatientProfileCard";
+import LogoutButton from "../LogoutButton/LogoutButton";
+import './PatientProfilePage.css'
 
 const PatientProfilePage = () => {
     return (
-        <PatientProfileCard />
+        <div className={"containerProfilePage"}>
+            <PatientProfileCard />
+        </div>
     )
 }
 
