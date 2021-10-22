@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import ConfirmCancelModal from "../ConfirmCancelModal/ConfirmCancelModal";
+import './PatientProfileCard.css'
 
 const PatientProfileCard = (props) => {
 
@@ -76,7 +77,7 @@ const PatientProfileCard = (props) => {
     }
 
     return (
-        <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
+        <div className="container mt-0 mb-4 p-3 d-flex justify-content-center profileCard">
             <div className="card p-4">
                 <div className=" image d-flex flex-column justify-content-center align-items-center">
                     <button className="btn btn-secondary" onClick={editProfile}>

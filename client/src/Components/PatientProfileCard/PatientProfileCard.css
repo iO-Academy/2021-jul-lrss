@@ -1,0 +1,12 @@
+.profileCard {
+    position: absolute;
+    top: 170px !important;
+    transform: translateX(-50%);
+    width: 270px !important;
+    border-radius: 20px;
+    left: 50%;
+}
+
+.card {
+    border: none;
+}
